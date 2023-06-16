@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F20157EF2A3C9720007000B6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20157EE2A3C9720007000B6 /* AVKit.framework */; };
 		F2FDD1D72A3ABC840040360C /* ClosePlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */; };
 		F2FDD1D92A3ABC840040360C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1D82A3ABC840040360C /* ContentView.swift */; };
 		F2FDD1DB2A3ABC840040360C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2FDD1DA2A3ABC840040360C /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F20157EE2A3C9720007000B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		F2BF78582A3B23D700FD31AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F2FDD1D32A3ABC840040360C /* ClosePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePlayerApp.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F20157EF2A3C9720007000B6 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F20157ED2A3C9720007000B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F20157EE2A3C9720007000B6 /* AVKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F2FDD1CA2A3ABC840040360C = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +95,7 @@
 				F2FDD1E72A3ABC850040360C /* ClosePlayerTests */,
 				F2FDD1F12A3ABC850040360C /* ClosePlayerUITests */,
 				F2FDD1D42A3ABC840040360C /* Products */,
+				F20157ED2A3C9720007000B6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
