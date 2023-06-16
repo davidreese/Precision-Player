@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import AVKit
 
 @main
 struct ClosePlayerApp: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

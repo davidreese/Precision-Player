@@ -14,6 +14,8 @@
 		F2FDD1E92A3ABC850040360C /* ClosePlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1E82A3ABC850040360C /* ClosePlayerTests.swift */; };
 		F2FDD1F32A3ABC850040360C /* ClosePlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1F22A3ABC850040360C /* ClosePlayerUITests.swift */; };
 		F2FDD1F52A3ABC850040360C /* ClosePlayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1F42A3ABC850040360C /* ClosePlayerUITestsLaunchTests.swift */; };
+		F2FDD2022A3ABF8B0040360C /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD2012A3ABF8B0040360C /* ContentModel.swift */; };
+		F2FDD2042A3B16010040360C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD2032A3B16010040360C /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F2BF78582A3B23D700FD31AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F2FDD1D32A3ABC840040360C /* ClosePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePlayerApp.swift; sourceTree = "<group>"; };
 		F2FDD1D82A3ABC840040360C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +48,8 @@
 		F2FDD1EE2A3ABC850040360C /* ClosePlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClosePlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2FDD1F22A3ABC850040360C /* ClosePlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePlayerUITests.swift; sourceTree = "<group>"; };
 		F2FDD1F42A3ABC850040360C /* ClosePlayerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePlayerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F2FDD2012A3ABF8B0040360C /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
+		F2FDD2032A3B16010040360C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +100,11 @@
 		F2FDD1D52A3ABC840040360C /* ClosePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				F2BF78582A3B23D700FD31AD /* Info.plist */,
 				F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */,
 				F2FDD1D82A3ABC840040360C /* ContentView.swift */,
+				F2FDD2032A3B16010040360C /* Player.swift */,
+				F2FDD2012A3ABF8B0040360C /* ContentModel.swift */,
 				F2FDD1DA2A3ABC840040360C /* Assets.xcassets */,
 				F2FDD1DC2A3ABC840040360C /* ClosePlayer.entitlements */,
 				F2FDD1DD2A3ABC840040360C /* Preview Content */,
@@ -259,8 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2FDD2042A3B16010040360C /* Player.swift in Sources */,
 				F2FDD1D92A3ABC840040360C /* ContentView.swift in Sources */,
 				F2FDD1D72A3ABC840040360C /* ClosePlayerApp.swift in Sources */,
+				F2FDD2022A3ABF8B0040360C /* ContentModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +429,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ClosePlayer/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -457,6 +468,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ClosePlayer/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
