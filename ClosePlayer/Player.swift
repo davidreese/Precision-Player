@@ -90,6 +90,8 @@ final class Player: NSObject, ObservableObject {
                          object: avPlayer.currentItem
             )
         
+        addRateObserver()
+        
 //        setupRemoteTransportControls()
 //        try? AVAudioSession.sharedInstance().setActive(true)
     }
@@ -151,6 +153,21 @@ final class Player: NSObject, ObservableObject {
     }
     
     @objc func playerDidFinishPlaying() {
+    }
+    
+    func addRateObserver() {
+        avPlayer?.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions.new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "rate" {
+            if let avPlayer = avPlayer, avPlayer.rate > 0 {
+                if avPlayer.rate != self.setRate {
+//                    Updates actual rate to equal the set one
+                    avPlayer.rate = self.setRate
+                }
+            }
+        }
     }
     
     fileprivate func addPeriodicTimeObserver() {

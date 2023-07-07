@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F20157EF2A3C9720007000B6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20157EE2A3C9720007000B6 /* AVKit.framework */; };
+		F2A646A82A3FFA2F00E86EE1 /* TimeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A646A72A3FFA2F00E86EE1 /* TimeKit.swift */; };
 		F2FDD1D72A3ABC840040360C /* ClosePlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */; };
 		F2FDD1D92A3ABC840040360C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FDD1D82A3ABC840040360C /* ContentView.swift */; };
 		F2FDD1DB2A3ABC840040360C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2FDD1DA2A3ABC840040360C /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		F20157EE2A3C9720007000B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		F2A646A72A3FFA2F00E86EE1 /* TimeKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeKit.swift; sourceTree = "<group>"; };
 		F2BF78582A3B23D700FD31AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F2FDD1D32A3ABC840040360C /* ClosePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClosePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePlayerApp.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				F2BF78582A3B23D700FD31AD /* Info.plist */,
 				F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */,
 				F2FDD1D82A3ABC840040360C /* ContentView.swift */,
+				F2A646A72A3FFA2F00E86EE1 /* TimeKit.swift */,
 				F2FDD2032A3B16010040360C /* Player.swift */,
 				F2FDD2012A3ABF8B0040360C /* ContentModel.swift */,
 				F2FDD1DA2A3ABC840040360C /* Assets.xcassets */,
@@ -281,6 +284,7 @@
 			files = (
 				F2FDD2042A3B16010040360C /* Player.swift in Sources */,
 				F2FDD1D92A3ABC840040360C /* ContentView.swift in Sources */,
+				F2A646A82A3FFA2F00E86EE1 /* TimeKit.swift in Sources */,
 				F2FDD1D72A3ABC840040360C /* ClosePlayerApp.swift in Sources */,
 				F2FDD2022A3ABF8B0040360C /* ContentModel.swift in Sources */,
 			);
