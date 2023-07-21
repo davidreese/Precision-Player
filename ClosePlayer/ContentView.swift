@@ -17,7 +17,7 @@ struct ContentView: View {
     
     @State private var isPresentingFileImporter = false
     
-    @State private var savedTime: CMTime?
+    @State private var heldTime: CMTime?
     
     @State private var seekValue = ""
     @State private var jumpToValue = ""
@@ -47,10 +47,10 @@ struct ContentView: View {
                         }
                         HStack {
                             Button("Hold") {
-                                self.savedTime = player.avPlayer?.currentTime()
+                                self.heldTime = player.avPlayer?.currentTime()
                             }
                             Button("Return") {
-                                guard let savedTime = savedTime else {
+                                guard let savedTime = heldTime else {
                                     return
                                 }
                                 player.scrub(to: savedTime.timeWithOffset(offset: -2))
@@ -202,20 +202,22 @@ struct ContentView: View {
                     
                     HStack {
                         let color: Color = {
-                            guard let savedSeconds = savedTime?.seconds else {
+                            guard let savedSeconds = heldTime?.seconds else {
                                 return Color.primary
                             }
                             
                             let diff = player.displayTime - savedSeconds
-                            if diff > 0 && diff < 200 {
+                            if diff < -10 {
                                 return Color.orange
-                            } else if diff > 200 {
+                            } else if diff < 0.3 && diff > -1 {
+                                return Color.cyan
+                            } else if diff > 250 {
                                 return Color.red
                             } else {
                                 return Color.primary
                             }
                         }()
-                        Text("HELD: \(savedTime?.seconds.rounded().formatted() ?? "nil")")
+                        Text("HELD: \(heldTime?.seconds.rounded().formatted() ?? "nil")")
                             .foregroundColor(color)
                         Spacer()
                     }
@@ -233,11 +235,11 @@ struct ContentView: View {
         }
         .padding(.vertical)
         .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video], onCompletion: { result in
-            
             do {
                 let url = try result.get()
                 let ap = AVPlayer(url: url)
                 self.player.set(avPlayer: ap)
+                self.heldTime = nil
                 
                 self.filename = url.lastPathComponent
             } catch {
