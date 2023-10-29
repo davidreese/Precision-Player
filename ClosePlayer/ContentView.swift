@@ -234,7 +234,7 @@ struct ContentView: View {
             }
         }
         .padding(.vertical)
-        .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video], onCompletion: { result in
+        .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video, .movie], onCompletion: { result in
             do {
                 let url = try result.get()
                 let ap = AVPlayer(url: url)
