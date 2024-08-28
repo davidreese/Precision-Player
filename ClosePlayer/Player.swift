@@ -15,7 +15,6 @@ import MediaPlayer
 let timeScale = CMTimeScale(1000)
 let time = CMTime(seconds: 0.5, preferredTimescale: timeScale)
 
-/// <#Description#>
 final class Player: NSObject, ObservableObject {
     /// Display time that will be bound to the scrub slider.
     @Published var displayTime: TimeInterval = 0

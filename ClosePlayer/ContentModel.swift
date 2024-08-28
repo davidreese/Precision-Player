@@ -9,4 +9,7 @@ import Foundation
 import AVFAudio
 
 class ContentModel: ObservableObject {
+    
+    init() {
+    }
 }

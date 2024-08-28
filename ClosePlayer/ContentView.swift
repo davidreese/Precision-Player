@@ -13,23 +13,35 @@ import Combine
 
 struct ContentView: View {
     @StateObject private var model: ContentModel = ContentModel()
-    @StateObject private var player: Player = Player()
-    
+//    @StateObject private var player: Player = Player()
+//    @State private var url: URL?
+    @State private var player: AVAudioPlayer?
+//    private var player: Binding<AVAudioPlayer?> = Binding {
+//        return nil
+//    } set: { val in
+//        not sure how to do this. currently just ripped out Player (commented out a lot of important lines in order to do that) and im trying to use AVAudioPlayer instead, but having a lot of trouble
+//    }
+
+
     @State private var isPresentingFileImporter = false
     
-    @State private var heldTime: CMTime?
+    @State private var heldTime: TimeInterval? = nil
     
     @State private var seekValue = ""
     @State private var jumpToValue = ""
-    @State private var filename: String?
+    @State private var filename: String? = nil
     
     @State private var selectedSpeed: String = "1.0" // Default selection
     let speeds: [String] = ["0.5", "1.0", "1.25", "1.5", "2.0", "3.0"]
     
     var body: some View {
         VStack {
-            VideoPlayer(player: player.avPlayer)
-                .cornerRadius(5)
+            AudioPlayer(player: player)
+//            VideoPlayer(player: url != nil ? AVPlayer(url: url!) : nil)
+//                .onChange(of: player.avPlayer?.rate, { oldValue, newValue in
+//                    print("RATE: \(player.avPlayer?.rate)")
+//                })
+//                .cornerRadius(5)
                 .padding(.horizontal)
             
             HStack {
@@ -47,13 +59,14 @@ struct ContentView: View {
                         }
                         HStack {
                             Button("Hold") {
-                                self.heldTime = player.avPlayer?.currentTime()
+                                self.heldTime = player?.currentTime
                             }
                             Button("Return") {
+//                                print(player.avPlayer)
                                 guard let savedTime = heldTime else {
                                     return
                                 }
-                                player.scrub(to: savedTime.timeWithOffset(offset: -2))
+                                player?.currentTime = savedTime - 2
                                 play()
                             }
                             Spacer()
@@ -67,7 +80,15 @@ struct ContentView: View {
                         TextField("Seek", text: self.$seekValue)
                         //                        .keyboardType(.numberPad)
                             .onReceive(Just(seekValue)) { newValue in
-                                let filtered = newValue.filter { "–-0123456789".contains($0) }
+                                var filtered = newValue.filter { "–-0123456789".contains($0) }
+                                if seekValue.count > 1 {
+                                    var newValueWithoutFirst = newValue
+                                    let first = newValueWithoutFirst.removeFirst()
+                                    
+                                    let filteredWithoutFirst = newValueWithoutFirst.filter { "0123456789".contains($0) }
+                                    filtered = String(first) + filteredWithoutFirst
+                                }
+                                
                                 if filtered != newValue {
                                     self.seekValue = filtered
                                 }
@@ -75,12 +96,15 @@ struct ContentView: View {
                             .onSubmit {
                                 print("Seeking...")
                                 
-                                guard let diff = Double(seekValue.replacingOccurrences(of: "–", with: "-")) else {
+                                
+                                guard let player = player, let diff = Double(seekValue.replacingOccurrences(of: "–", with: "-")) else {
                                     print("Invalid seek input")
                                     return
                                 }
                                 
-                                player.scrub(seconds: diff)
+                                player.currentTime = player.currentTime + diff
+                                
+//                                player.scrub(seconds: diff)
                                 seekValue = "-"
                                 player.play()
                             }
@@ -102,13 +126,15 @@ struct ContentView: View {
                                 print("Jumping...")
                                 
                                 if let jumpToInSeconds = Double(jumpToValue) {
-                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
+                                    player?.currentTime = jumpToInSeconds
+//                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
                                     jumpToValue = ""
-                                    player.play()
+                                    player?.play()
                                 } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
-                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
+                                    player?.currentTime = jumpToTI
+//                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
                                     jumpToValue = ""
-                                    player.play()
+                                    player?.play()
                                 }
                             }
                             .frame(maxWidth: 200)
@@ -119,82 +145,39 @@ struct ContentView: View {
                     //                    Spacer()
                     
                     HStack {
-                        /*
-                         Menu {
-                         Button(action: {
-                         //                                            Haptics.shared.play(.rigid)
-                         player.setRate(0.5)
-                         }) {
-                         Label {
-                         Text("0.5x")
-                         } icon: {
-                         Image(nsImage: NSImage(systemSymbolName: "checkmark", accessibilityDescription: )!)
-                         }
-                         
-                         //                                Label("0.5x", systemImage: (player.setRate == 0.5) ? "checkmark" : "tortoise")
-                         }
-                         Button(action: {
-                         //                                            Haptics.shared.play(.rigid)
-                         player.setRate(0.75)
-                         }) {
-                         Label("0.75x", systemImage: (player.setRate == 0.75) ? "checkmark" : "")
-                         }
-                         Button(action: {
-                         //                                            Haptics.shared.play(.rigid)
-                         player.setRate(1)
-                         }) {
-                         Label("1x", systemImage: (player.setRate == 1) ? "checkmark" : "figure.walk")
-                         }
-                         Button(action: {
-                         //                                            Haptics.shared.play(.rigid)
-                         player.setRate(1.5)
-                         }) {
-                         Label("1.5x", systemImage: (player.setRate == 1.5) ? "checkmark" : "")
-                         }
-                         Button(action: {
-                         //                                            Haptics.shared.play(.rigid)
-                         player.setRate(2)
-                         }) {
-                         Label("2x", systemImage: (player.setRate == 2) ? "checkmark" : "hare")
-                         }
-                         } label: {
-                         Image(systemName: "speedometer")
-                         .resizable()
-                         .foregroundColor(.gray)
-                         .frame(width: 20, height: 20)
-                         }
-                         */
-                        
                         Picker("Rate:", selection: $selectedSpeed) {
                             ForEach(speeds, id: \.self) { option in
                                 Text("\(option)x")
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
-                        .onChange(of: selectedSpeed) { value in
-                            player.setRate(Float(value)!)
+                        .onChange(of: selectedSpeed) {
+//                            player.setRate(Float(value)!)
+//                            player!.pause()
+                            player?.rate = Float(selectedSpeed)!
+                            player?.play()
                         }
                         .frame(maxWidth: 200)
+                        
                         Spacer()
                     }
                     Spacer()
                     
                     
                     HStack {
-                        if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
-                            ProgressView()
-                            Spacer()
-                        }
+//                        if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
+//                            ProgressView()
+//                            Spacer()
+//                        }
                     }
                 }.padding(.horizontal)
                 
                 Divider()
-                //                Spacer()
                 
                 VStack {
                     Spacer()
                     HStack {
-                        Text("TIME: \(player.displayTime.rounded().formatted())")
+//                        Text("TIME: \(player.displayTime.rounded().formatted())")
                         Spacer()
                     }
                     
@@ -202,22 +185,22 @@ struct ContentView: View {
                     
                     HStack {
                         let color: Color = {
-                            guard let savedSeconds = heldTime?.seconds else {
+                            guard let savedSeconds = heldTime else {
                                 return Color.primary
                             }
                             
-                            let diff = player.displayTime - savedSeconds
-                            if diff < -10 {
-                                return Color.orange
-                            } else if diff < 0.3 && diff > -1 {
-                                return Color.cyan
-                            } else if diff > 250 {
-                                return Color.red
-                            } else {
+//                            let diff = player.displayTime - savedSeconds
+//                            if diff < -10 {
+//                                return Color.orange
+//                            } else if diff < 0.3 && diff > -1 {
+//                                return Color.cyan
+//                            } else if diff > 250 {
+//                                return Color.red
+//                            } else {
                                 return Color.primary
-                            }
+//                            }
                         }()
-                        Text("HELD: \(heldTime?.seconds.rounded().formatted() ?? "nil")")
+                        Text("HELD: \(heldTime?.rounded().formatted() ?? "nil")")
                             .foregroundColor(color)
                         Spacer()
                     }
@@ -225,7 +208,7 @@ struct ContentView: View {
                     //                    Spacer()
                     
                     HStack {
-                        Text("DURATION: \(player.itemDuration.rounded().formatted())")
+//                        Text("DURATION: \(player.itemDuration.rounded().formatted())")
                         Spacer()
                     }
                     
@@ -234,14 +217,21 @@ struct ContentView: View {
             }
         }
         .padding(.vertical)
-        .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video, .movie], onCompletion: { result in
+        .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video, .movie, .mp3], onCompletion: { result in
             do {
                 let url = try result.get()
-                let ap = AVPlayer(url: url)
-                self.player.set(avPlayer: ap)
+//                let ap = AVPlayer(playerItem: AVPlayerItem(url: url))
+//                self.player.set(avPlayer: ap)
+                self.player = try AVAudioPlayer(contentsOf: url)
+                player!.enableRate = true
+                player!.prepareToPlay()
+                
+//                self.url = url
                 self.heldTime = nil
                 
                 self.filename = url.lastPathComponent
+                
+//                print(self.player.avPlayer)
             } catch {
                 print("Error importing audio file: \(error)")
             }
@@ -250,7 +240,7 @@ struct ContentView: View {
     
     
     func play() {
-        player.play()
+        player?.play()
     }
 }
 
