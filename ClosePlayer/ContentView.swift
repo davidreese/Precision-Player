@@ -232,8 +232,9 @@ struct ContentView: View {
         .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video, .movie, .mp3], onCompletion: { result in
             do {
                 let url = try result.get()
-//                let ap = AVPlayer(playerItem: AVPlayerItem(url: url))
-//                self.player.set(avPlayer: ap)
+
+                guard url.startAccessingSecurityScopedResource() else {return}
+                
                 let player = try AVAudioPlayer(contentsOf: url)
                 player.enableRate = true
                 player.prepareToPlay()
