@@ -10,8 +10,17 @@ import AVFAudio
 
 class ContentModel: ObservableObject {
     
+    var timer: Timer? = nil
+    
     init() {
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+    }
+    
+    func stopUpdating() {
+        timer?.invalidate()
+    }
+    
+    func startUpdating() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             self.objectWillChange.send()
         }
     }

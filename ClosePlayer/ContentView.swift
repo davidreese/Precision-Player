@@ -258,6 +258,7 @@ struct ContentView: View {
     
     func play() {
         audioPlayer?.play()
+        model.startUpdating()
     }
 }
 
