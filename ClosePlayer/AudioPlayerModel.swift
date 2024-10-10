@@ -2,151 +2,278 @@ import Foundation
 import AVKit
 import MediaPlayer
 #if os(iOS)
-import UIKit
+    import UIKit
 #endif
 
-class AudioPlayerModel: ObservableObject, NowPlayable {
-    @Published private(set) var player: AVAudioPlayer?
-    
-    @Published var currentTime: TimeInterval?
-    @Published var isPlaying: Bool?
-    
-    // NowPlayable protocol properties
-    var defaultAllowsExternalPlayback: Bool { true } // Allow external playback by default
-    var defaultRegisteredCommands: [NowPlayableCommand] { [.play, .pause] }
-    var defaultDisabledCommands: [NowPlayableCommand] { [] } // No commands disabled by default
-    
-    init(player: AVAudioPlayer?) {
+//import Swift .UI
+
+class AudioPlayerModel: ObservableObject {
+
+    enum PlayerState {
+        case stopped
+        case playing
+        case paused
+    }
+
+    unowned let nowPlayableBehavior: NowPlayable
+
+    @Published var player: AVAudioPlayer
+
+    private var playerState: PlayerState = .stopped {
+        didSet {
+            #if os(macOS)
+            NSLog("%@", "**** Set player state \(playerState), playbackState \(MPNowPlayingInfoCenter.default().playbackState.rawValue)")
+            #else
+            NSLog("%@", "**** Set player state \(playerState)")
+            #endif
+        }
+    }
+
+    private var isInterrupted: Bool = false
+
+    private var timer: Timer?
+
+    // Metadata for the audio item
+    private var staticMetadata: NowPlayableStaticMetadata!
+
+    init(player: AVAudioPlayer, title: String, artist: String? = nil) {
+        if let shared = ConfigModel.shared {
+            self.nowPlayableBehavior = shared.nowPlayableBehavior
+        } else {
+            self.nowPlayableBehavior = ConfigModel(nowPlayableBehavior: MacNowPlayableBehavior()).nowPlayableBehavior
+        }
+        
         self.player = player
+//        self.staticMetadata = metadata
         
-        self.currentTime = player?.currentTime
-        self.isPlaying = player?.isPlaying
         
-        configureControlCenterMedia() // Keep your existing setup
+        itemChanged(title: title, artist: artist)
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            self.currentTime = player?.currentTime
-            self.isPlaying = player?.isPlaying
-            
-            // Update Now Playing info in the timer as well
-            if let player = self.player {
-                self.handleNowPlayablePlaybackChange(playing: player.isPlaying,
-                                                     metadata: NowPlayableDynamicMetadata(
-                                                        rate: player.rate,
-                                                        position: Float(player.currentTime),
-                                                        duration: Float(player.duration),
-                                                        currentLanguageOptions: [], // Update with actual language options if needed
-                                                        availableLanguageOptionGroups: [] // Update with actual language options if needed
-                                                     )
-                )
-            }
-        }
-        
-        // Try to start a NowPlayable session when initialized
-        do {
-            try handleNowPlayableSessionStart()
-        } catch {
-            print("Error starting NowPlayable session: \(error)")
-        }
-    }
-    
-    private func configureControlCenterMedia() {
-        guard let player = player else {
-              print("Can't set up remote transport controls because player is nil")
-            return
-                }
-             
-          #if os(iOS)
-            UIApplication.shared.beginReceivingRemoteControlEvents()
-          #endif
-        //            UIApplication.shared.beginReceivingRemoteControlEvents()
-          let commandCenter = MPRemoteCommandCenter.shared()
-            commandCenter.nextTrackCommand.isEnabled = false
-          commandCenter.previousTrackCommand.isEnabled = false
-          commandCenter.togglePlayPauseCommand.isEnabled = true
-        
-          commandCenter.playCommand.addTarget { event in
-            if !player.isPlaying {
-                    player.play()
-                    return .success
-                  } else {
-                        return .commandFailed
-                        }
-              }
-         
-          commandCenter.pauseCommand.addTarget { event in
-              if player.isPlaying {
-                    player.pause()
-                    return .success
-                  } else {
-                        return .commandFailed
-                        }
-        }
-        
-        var nowPlayingInfo: [String: Any] = [:]
-        nowPlayingInfo[MPMediaItemPropertyTitle] = "audio?.title"
-          nowPlayingInfo[MPMediaItemPropertyArtist] = "audio?.author.name"
-         
         /*
-                     let lightTrait = UITraitCollection(userInterfaceStyle: .light)
-                     if let image = UIImage(named: "Logo", in: nil, compatibleWith: lightTrait) {
-                         nowPlayingInfo[MPMediaItemPropertyArtwork] =
-                         MPMediaItemArtwork(boundsSize: image.size) { size in
-                             return image
-                         }
-                     }*/
-        
-        commandCenter.changePlaybackPositionCommand.isEnabled = true
-        
-        commandCenter.changePlaybackPositionCommand.addTarget { event in
-            guard let event = event as? MPChangePlaybackPositionCommandEvent else {
-                return .commandFailed
+        if self.player != nil {
+            do {
+                try handleNowPlayableSessionStart()
+                play()
+            } catch {
+                print("Error starting NowPlayable session or playing: \(error)")
             }
-            //                let time = CMTime(seconds: event.positionTime, preferredTimescale: 1_000_000)
-            self.player?.currentTime = event.positionTime
-            return .success
-        }
-        
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { _ in
-            guard let player = self.player else {
-                print("Can't set up remote transport controls because player is nil (2)")
-                return
-                                }
-            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
-            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player.duration
-            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
-            nowPlayingInfo[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1.0
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-        }
+        }*/
     }
     
-    // NowPlayable protocol methods
-    func handleNowPlayableConfiguration(commands: [NowPlayableCommand],
-                                        disabledCommands: [NowPlayableCommand],
-                                        commandHandler: @escaping (NowPlayableCommand, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus,
-                                        interruptionHandler: @escaping (NowPlayableInterruption) -> Void) throws {
-        // You can use the configureRemoteCommands extension here if needed
-        try configureRemoteCommands(commands, disabledCommands: disabledCommands, commandHandler: commandHandler)
+    func itemChanged(title: String, artist: String? = nil) {
+//        self.title = title
+//        self.artist = artist
         
-        // Handle interruptions (not implemented in this example, but you would set up your logic here)
+        staticMetadata = NowPlayableStaticMetadata(assetURL: player.url!, mediaType: .audio, isLiveStream: false, title: title, artist: artist ?? "", artwork: nil, albumArtist: nil, albumTitle: nil)
+        
+        configureNowPlayable()
+    }
+
+    private func configureNowPlayable() {
+        // Configure commands based on your ConfigModel
+        var registeredCommands = [] as [NowPlayableCommand]
+        var enabledCommands = [] as [NowPlayableCommand]
+
+        for group in ConfigModel.shared.commandCollections {
+            registeredCommands.append(contentsOf: group.commands.compactMap { $0.shouldRegister ? $0.command : nil })
+            enabledCommands.append(contentsOf: group.commands.compactMap { $0.shouldDisable ? $0.command : nil })
+        }
+
+        do {
+            try nowPlayableBehavior.handleNowPlayableConfiguration(
+                commands: registeredCommands,
+                disabledCommands: enabledCommands,
+                commandHandler: handleCommand(command:event:),
+                interruptionHandler: handleInterrupt(with:)
+            )
+        } catch {
+            print("Error configuring NowPlayable: \(error)")
+        }
+    }
+
+    func optOut() {
+        timer?.invalidate()
+        timer = nil
+        player.stop()
+        playerState = .stopped
+        nowPlayableBehavior.handleNowPlayableSessionEnd()
+    }
+
+    // MARK: Now Playing Info
+
+    private func handlePlayerItemChange() {
+        guard playerState != .stopped else { return }
+        nowPlayableBehavior.handleNowPlayableItemChange(metadata: staticMetadata)
+    }
+
+    private func handlePlaybackChange() {
+        guard playerState != .stopped else { return }
+
+        let isPlaying = playerState == .playing
+        let metadata = NowPlayableDynamicMetadata(
+            rate: player.rate,
+            position: Float(player.currentTime),
+            duration: Float(player.duration),
+            currentLanguageOptions: [], // Update with actual language options if needed
+            availableLanguageOptionGroups: [] // Update with actual language options if needed
+        )
+
+        nowPlayableBehavior.handleNowPlayablePlaybackChange(playing: isPlaying, metadata: metadata)
+    }
+    
+//    func play() {
+//        play()
+//    }
+
+    // MARK: Playback Control
+
+    func play() {
+        switch playerState {
+        case .stopped:
+            playerState = .playing
+            player.play()
+            handlePlayerItemChange()
+            startPlaybackUpdates()
+        case .playing:
+            break
+        case .paused where isInterrupted:
+            playerState = .playing
+        case .paused:
+            playerState = .playing
+            player.play()
+        }
+    }
+
+    private func pause() {
+        switch playerState {
+        case .stopped:
+            break
+        case .playing where isInterrupted:
+            playerState = .paused
+        case .playing:
+            playerState = .paused
+            player.pause()
+        case .paused:
+            break
+        }
+    }
+
+    private func togglePlayPause() {
+        switch playerState {
+        case .stopped:
+            play()
+        case .playing:
+            pause()
+        case .paused:
+            play()
+        }
+    }
+
+    // Implement other playback control methods (nextTrack, previousTrack, seek, etc.)
+    // These will likely need to be adapted to work with AVAudioPlayer
+    // instead of AVQueuePlayer, as AVAudioPlayer doesn't support features
+    // like multiple items or seeking within a track
+
+    private func startPlaybackUpdates() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.handlePlaybackChange()
+//            withAnimation {
+                self?.objectWillChange.send()
+//            }
+        }
+    }
+
+    // MARK: Remote Commands
+
+    private func handleCommand(command: NowPlayableCommand, event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+        switch command {
+        case .pause:
+            pause()
+        case .play:
+            play()
+        case .stop:
+            optOut()
+        case .togglePausePlay:
+            togglePlayPause()
+            
+        // Handle other commands like nextTrack, previousTrack, seek, etc.
+        // You'll need to adapt these to work with AVAudioPlayer's capabilities
+
+        case .changePlaybackRate:
+            guard let event = event as? MPChangePlaybackRateCommandEvent else { return .commandFailed }
+            setPlaybackRate(event.playbackRate)
+
+        // ... (handle other commands as needed)
+
+        default:
+            break
+        }
+
+        return .success
+    }
+
+    func setPlaybackRate(_ rate: Float) {
+//        if case .stopped = playerState { return }
+        player.rate = rate
+    }
+
+    // ... (Implement didEnableLanguageOption and didDisableLanguageOption if needed for your app)
+
+    // MARK: Interruptions
+
+    private func handleInterrupt(with interruption: NowPlayableInterruption) {
+        switch interruption {
+        case .began:
+            isInterrupted = true
+        case .ended(let shouldPlay):
+            isInterrupted = false
+
+            switch playerState {
+            case .stopped:
+                break
+            case .playing where shouldPlay:
+                player.play()
+            case .playing:
+                playerState = .paused
+            case .paused:
+                break
+            }
+
+        case .failed(let error):
+            print(error.localizedDescription)
+            optOut()
+        }
+    }
+}
+
+/*
+class MacNowPlayable: NowPlayable {
+    var defaultAllowsExternalPlayback: Bool = true
+    
+    var defaultRegisteredCommands: [NowPlayableCommand] = []
+    
+    var defaultDisabledCommands: [NowPlayableCommand] = []
+    
+    func handleNowPlayableConfiguration(commands: [NowPlayableCommand], disabledCommands: [NowPlayableCommand], commandHandler: @escaping (NowPlayableCommand, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus, interruptionHandler: @escaping (NowPlayableInterruption) -> Void) throws {
+        print("handleNowPlayableConfiguration called...")
     }
     
     func handleNowPlayableSessionStart() throws {
-        // Start your audio session or set playback state here (platform-dependent)
-        // For example, on iOS, you might activate an AVAudioSession
+        print("handleNowPlayableSessionStart called...")
     }
     
     func handleNowPlayableSessionEnd() {
-        // End your audio session or reset playback state here (platform-dependent)
+        print("handleNowPlayableSessionEnd called...")
     }
     
     func handleNowPlayableItemChange(metadata: NowPlayableStaticMetadata) {
-        // Update Now Playing info with static metadata
-        setNowPlayingMetadata(metadata)
+        print("handleNowPlayableItemChange called...")
     }
     
     func handleNowPlayablePlaybackChange(playing: Bool, metadata: NowPlayableDynamicMetadata) {
-        // Update Now Playing info with dynamic playback metadata
-        setNowPlayingPlaybackInfo(metadata)
+        print("handleNowPlayablePlaybackChange called...")
     }
-}
+    
+    
+}*/

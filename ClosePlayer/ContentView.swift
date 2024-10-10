@@ -22,6 +22,7 @@ struct ContentView: View {
 //        not sure how to do this. currently just ripped out Player (commented out a lot of important lines in order to do that) and im trying to use AVAudioPlayer instead, but having a lot of trouble
 //    }
 
+    @State private var audioPlayer: AudioPlayer?
 
     @State private var isPresentingFileImporter = false
     
@@ -36,13 +37,16 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            AudioPlayer(player: player)
+            if let audioPlayer = audioPlayer {
+                audioPlayer
+                    .padding(.horizontal)
+            }
 //            VideoPlayer(player: url != nil ? AVPlayer(url: url!) : nil)
 //                .onChange(of: player.avPlayer?.rate, { oldValue, newValue in
 //                    print("RATE: \(player.avPlayer?.rate)")
 //                })
 //                .cornerRadius(5)
-                .padding(.horizontal)
+                
             
             HStack {
                 VStack {
@@ -106,7 +110,7 @@ struct ContentView: View {
                                 
 //                                player.scrub(seconds: diff)
                                 seekValue = "-"
-                                player.play()
+                                play()
                             }
                             .frame(maxWidth: 200)
                         
@@ -129,12 +133,12 @@ struct ContentView: View {
                                     player?.currentTime = jumpToInSeconds
 //                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
                                     jumpToValue = ""
-                                    player?.play()
+                                    play()
                                 } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
                                     player?.currentTime = jumpToTI
 //                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
                                     jumpToValue = ""
-                                    player?.play()
+                                    play()
                                 }
                             }
                             .frame(maxWidth: 200)
@@ -154,8 +158,8 @@ struct ContentView: View {
                         .onChange(of: selectedSpeed) {
 //                            player.setRate(Float(value)!)
 //                            player!.pause()
-                            player?.rate = Float(selectedSpeed)!
-                            player?.play()
+//                            player?.rate = Float(selectedSpeed)!
+                            audioPlayer?.setRate(Float(selectedSpeed)!)
                         }
                         .frame(maxWidth: 200)
                         
@@ -177,7 +181,11 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     HStack {
-//                        Text("TIME: \(player.displayTime.rounded().formatted())")
+                        if let player {
+                            Text("TIME: \(player.currentTime.rounded().formatted())")
+                        } else {
+                            Text("TIME: nil")
+                        }
                         Spacer()
                     }
                     
@@ -185,20 +193,20 @@ struct ContentView: View {
                     
                     HStack {
                         let color: Color = {
-                            guard let savedSeconds = heldTime else {
+                            guard let savedSeconds = heldTime, let player else {
                                 return Color.primary
                             }
                             
-//                            let diff = player.displayTime - savedSeconds
-//                            if diff < -10 {
-//                                return Color.orange
-//                            } else if diff < 0.3 && diff > -1 {
-//                                return Color.cyan
-//                            } else if diff > 250 {
-//                                return Color.red
-//                            } else {
+                            let diff = player.currentTime - savedSeconds
+                            if diff < -10 {
+                                return Color.orange
+                            } else if diff < 0.3 && diff > -1 {
+                                return Color.cyan
+                            } else if diff > 250 {
+                                return Color.red
+                            } else {
                                 return Color.primary
-//                            }
+                            }
                         }()
                         Text("HELD: \(heldTime?.rounded().formatted() ?? "nil")")
                             .foregroundColor(color)
@@ -208,7 +216,11 @@ struct ContentView: View {
                     //                    Spacer()
                     
                     HStack {
-//                        Text("DURATION: \(player.itemDuration.rounded().formatted())")
+                        if let player {
+                            Text("DURATION: \(player.duration.rounded().formatted())")
+                        } else {
+                            Text("DURATION: nil")
+                        }
                         Spacer()
                     }
                     
@@ -222,14 +234,20 @@ struct ContentView: View {
                 let url = try result.get()
 //                let ap = AVPlayer(playerItem: AVPlayerItem(url: url))
 //                self.player.set(avPlayer: ap)
-                self.player = try AVAudioPlayer(contentsOf: url)
-                player!.enableRate = true
-                player!.prepareToPlay()
+                let player = try AVAudioPlayer(contentsOf: url)
+                player.enableRate = true
+                player.prepareToPlay()
+                
+                self.filename = url.lastPathComponent
+                self.audioPlayer = AudioPlayer(player: player, title: filename!, artist: nil)
+                self.audioPlayer?.setRate(Float(selectedSpeed)!)
+                
+                self.player = player
                 
 //                self.url = url
                 self.heldTime = nil
                 
-                self.filename = url.lastPathComponent
+                
                 
 //                print(self.player.avPlayer)
             } catch {
@@ -238,9 +256,8 @@ struct ContentView: View {
         })
     }
     
-    
     func play() {
-        player?.play()
+        audioPlayer?.play()
     }
 }
 

@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		F20157EF2A3C9720007000B6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20157EE2A3C9720007000B6 /* AVKit.framework */; };
 		F227C0A62BC96097006A7468 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F227C0A52BC96097006A7468 /* AudioPlayer.swift */; };
-		F25E1FB62C7F46AC00BF3F44 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F25E1FB52C7F46AC00BF3F44 /* Info.plist */; };
+		F25E1FBD2C7F517100BF3F44 /* ConfigAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FB82C7F517100BF3F44 /* ConfigAsset.swift */; };
+		F25E1FBE2C7F517100BF3F44 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FB92C7F517100BF3F44 /* ConfigCommand.swift */; };
+		F25E1FBF2C7F517100BF3F44 /* ConfigCommandCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FBA2C7F517100BF3F44 /* ConfigCommandCollection.swift */; };
+		F25E1FC02C7F517100BF3F44 /* ConfigPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FBB2C7F517100BF3F44 /* ConfigPath.swift */; };
+		F25E1FC12C7F517100BF3F44 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FBC2C7F517100BF3F44 /* ConfigModel.swift */; };
+		F287724A2CB776FE00CBECF6 /* MacNowPlayableBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28772492CB776FE00CBECF6 /* MacNowPlayableBehavior.swift */; };
 		F2A646A82A3FFA2F00E86EE1 /* TimeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A646A72A3FFA2F00E86EE1 /* TimeKit.swift */; };
 		F2BF27D32C6C333F00610BC6 /* NowPlayableMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BF27CF2C6C333F00610BC6 /* NowPlayableMetadata.swift */; };
 		F2BF27D42C6C333F00610BC6 /* NowPlayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BF27D02C6C333F00610BC6 /* NowPlayable.swift */; };
@@ -48,6 +53,12 @@
 		F20157EE2A3C9720007000B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		F227C0A52BC96097006A7468 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		F25E1FB52C7F46AC00BF3F44 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F25E1FB82C7F517100BF3F44 /* ConfigAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigAsset.swift; sourceTree = "<group>"; };
+		F25E1FB92C7F517100BF3F44 /* ConfigCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigCommand.swift; sourceTree = "<group>"; };
+		F25E1FBA2C7F517100BF3F44 /* ConfigCommandCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigCommandCollection.swift; sourceTree = "<group>"; };
+		F25E1FBB2C7F517100BF3F44 /* ConfigPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigPath.swift; sourceTree = "<group>"; };
+		F25E1FBC2C7F517100BF3F44 /* ConfigModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
+		F28772492CB776FE00CBECF6 /* MacNowPlayableBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacNowPlayableBehavior.swift; sourceTree = "<group>"; };
 		F2A646A72A3FFA2F00E86EE1 /* TimeKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeKit.swift; sourceTree = "<group>"; };
 		F2BF27CF2C6C333F00610BC6 /* NowPlayableMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableMetadata.swift; sourceTree = "<group>"; };
 		F2BF27D02C6C333F00610BC6 /* NowPlayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayable.swift; sourceTree = "<group>"; };
@@ -103,6 +114,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F25E1FB72C7F517100BF3F44 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F25E1FB82C7F517100BF3F44 /* ConfigAsset.swift */,
+				F25E1FB92C7F517100BF3F44 /* ConfigCommand.swift */,
+				F25E1FBA2C7F517100BF3F44 /* ConfigCommandCollection.swift */,
+				F25E1FBB2C7F517100BF3F44 /* ConfigPath.swift */,
+				F25E1FBC2C7F517100BF3F44 /* ConfigModel.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		F2BF27CE2C6C333F00610BC6 /* NowPlayable */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +167,8 @@
 				F2FDD1D82A3ABC840040360C /* ContentView.swift */,
 				F227C0A52BC96097006A7468 /* AudioPlayer.swift */,
 				F2FA3D622C6B81BE008A6859 /* AudioPlayerModel.swift */,
+				F28772492CB776FE00CBECF6 /* MacNowPlayableBehavior.swift */,
+				F25E1FB72C7F517100BF3F44 /* Configuration */,
 				F2A646A72A3FFA2F00E86EE1 /* TimeKit.swift */,
 				F2FDD2032A3B16010040360C /* Player.swift */,
 				F2FDD2012A3ABF8B0040360C /* ContentModel.swift */,
@@ -243,7 +268,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F2FDD1D22A3ABC840040360C = {
 						CreatedOnToolsVersion = 14.3;
@@ -285,7 +310,6 @@
 			files = (
 				F2FDD1DF2A3ABC840040360C /* Preview Assets.xcassets in Resources */,
 				F2FDD1DB2A3ABC840040360C /* Assets.xcassets in Resources */,
-				F25E1FB62C7F46AC00BF3F44 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,11 +335,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2BF27D62C6C333F00610BC6 /* NowPlayableCommand.swift in Sources */,
+				F25E1FBE2C7F517100BF3F44 /* ConfigCommand.swift in Sources */,
 				F2FDD2042A3B16010040360C /* Player.swift in Sources */,
+				F25E1FC12C7F517100BF3F44 /* ConfigModel.swift in Sources */,
+				F25E1FC02C7F517100BF3F44 /* ConfigPath.swift in Sources */,
 				F2FDD1D92A3ABC840040360C /* ContentView.swift in Sources */,
 				F2A646A82A3FFA2F00E86EE1 /* TimeKit.swift in Sources */,
+				F25E1FBF2C7F517100BF3F44 /* ConfigCommandCollection.swift in Sources */,
 				F2BF27D42C6C333F00610BC6 /* NowPlayable.swift in Sources */,
 				F2BF27D32C6C333F00610BC6 /* NowPlayableMetadata.swift in Sources */,
+				F287724A2CB776FE00CBECF6 /* MacNowPlayableBehavior.swift in Sources */,
+				F25E1FBD2C7F517100BF3F44 /* ConfigAsset.swift in Sources */,
 				F2FDD1D72A3ABC840040360C /* ClosePlayerApp.swift in Sources */,
 				F2FA3D632C6B81BE008A6859 /* AudioPlayerModel.swift in Sources */,
 				F2BF27D52C6C333F00610BC6 /* NowPlayableError.swift in Sources */,
@@ -390,9 +420,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -448,9 +480,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -474,6 +508,7 @@
 				CODE_SIGN_ENTITLEMENTS = ClosePlayer/ClosePlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ClosePlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = YL279DNVQD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -513,6 +548,7 @@
 				CODE_SIGN_ENTITLEMENTS = ClosePlayer/ClosePlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ClosePlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = YL279DNVQD;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -551,6 +587,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YL279DNVQD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -574,6 +611,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YL279DNVQD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -596,6 +634,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YL279DNVQD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -618,6 +657,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YL279DNVQD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;

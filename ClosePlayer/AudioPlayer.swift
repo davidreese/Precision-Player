@@ -11,7 +11,7 @@ import MediaPlayer
 
 struct AudioPlayer: View {
 //    var player: StateObject<Player>
-    @ObservedObject var model: AudioPlayerModel
+    @ObservedObject private var model: AudioPlayerModel
     
     struct UI {
         static let cornerRadius = 6.0
@@ -21,8 +21,8 @@ struct AudioPlayer: View {
 //        self.player = player
 //    }
     
-    init(player: AVAudioPlayer?) {
-        self.model = AudioPlayerModel(player: player)
+    init(player: AVAudioPlayer, title: String, artist: String? = nil) {
+        self.model = AudioPlayerModel(player: player, title: title, artist: artist)
     }
     
     var body: some View {
@@ -34,30 +34,42 @@ struct AudioPlayer: View {
                 HStack(spacing: 10) {
                     Spacer()
                     Button(action: {
-//                        player.wrappedValue.play()
-                        if !(model.isPlaying ?? false) {
-                            model.player?.play()
+                        //                        player.wrappedValue.play()
+                        if !(model.player.isPlaying) {
+                            model.play()
                         } else {
-                            model.player?.pause()
+                            model.player.pause()
                         }
                     }, label: {
-                        Image(systemName: model.isPlaying ?? false ? "pause.fill" : "play.fill")
+                        Image(systemName: model.player.isPlaying ? "pause.fill" : "play.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 15)
                     }).buttonStyle(.borderless)
                     
-                    Text(timeFormatted(totalSeconds: model.currentTime))
-                    
-                    if let currentTime = model.currentTime, let duration = model.player?.duration {
-                        ProgressView(value: currentTime, total: duration)
-                            .progressViewStyle(.linear)
+                    if model.player.currentTime < 3600 {
+                        HStack {
+                            Text(timeFormatted(totalSeconds: model.player.currentTime))
+                            Spacer()
+                        }
+                        .frame(width: 45)
                     } else {
-                        ProgressView(value: 0, total: 1)
-                            .progressViewStyle(.linear)
+                        HStack {
+                            Text(timeFormatted(totalSeconds: model.player.currentTime))
+                            Spacer()
+                        }
+                        .frame(width: 65)
                     }
                     
-                    Text(timeFormatted(totalSeconds: model.player?.duration))
+//                    if let currentTime = model.player.currentTime, let duration = model.player.duration {
+                        ProgressView(value: model.player.currentTime, total: model.player.duration)
+                            .progressViewStyle(.linear)
+//                    } else {
+//                        ProgressView(value: 0, total: 1)
+//                            .progressViewStyle(.linear)
+//                    }
+                    
+                    Text(timeFormatted(totalSeconds: model.player.duration))
                     
                     Spacer()
                     
@@ -66,6 +78,13 @@ struct AudioPlayer: View {
         
     }
         
+    func setRate(_ rate: Float) {
+        model.setPlaybackRate(rate)
+    }
+    
+    func play() {
+        model.play()
+    }
     
     
     /// Imported from YTS-App
