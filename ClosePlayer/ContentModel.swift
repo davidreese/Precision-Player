@@ -11,5 +11,8 @@ import AVFAudio
 class ContentModel: ObservableObject {
     
     init() {
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
+            self.objectWillChange.send()
+        }
     }
 }

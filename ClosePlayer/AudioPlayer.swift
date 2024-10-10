@@ -11,7 +11,7 @@ import MediaPlayer
 
 struct AudioPlayer: View {
 //    var player: StateObject<Player>
-    @ObservedObject private var model: AudioPlayerModel
+    @ObservedObject private(set) var model: AudioPlayerModel
     
     struct UI {
         static let cornerRadius = 6.0

@@ -181,8 +181,8 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        if let player {
-                            Text("TIME: \(player.currentTime.rounded().formatted())")
+                        if let audioPlayer {
+                            Text("TIME: \(audioPlayer.model.player.currentTime.rounded().formatted())")
                         } else {
                             Text("TIME: nil")
                         }
@@ -193,11 +193,11 @@ struct ContentView: View {
                     
                     HStack {
                         let color: Color = {
-                            guard let savedSeconds = heldTime, let player else {
+                            guard let savedSeconds = heldTime, let audioPlayer else {
                                 return Color.primary
                             }
                             
-                            let diff = player.currentTime - savedSeconds
+                            let diff = audioPlayer.model.player.currentTime - savedSeconds
                             if diff < -10 {
                                 return Color.orange
                             } else if diff < 0.3 && diff > -1 {
@@ -216,8 +216,8 @@ struct ContentView: View {
                     //                    Spacer()
                     
                     HStack {
-                        if let player {
-                            Text("DURATION: \(player.duration.rounded().formatted())")
+                        if let audioPlayer {
+                            Text("DURATION: \(audioPlayer.model.player.duration.rounded().formatted())")
                         } else {
                             Text("DURATION: nil")
                         }
