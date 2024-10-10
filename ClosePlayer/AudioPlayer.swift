@@ -38,7 +38,7 @@ struct AudioPlayer: View {
                         if !(model.player.isPlaying) {
                             model.play()
                         } else {
-                            model.player.pause()
+                            model.pause()
                         }
                     }, label: {
                         Image(systemName: model.player.isPlaying ? "pause.fill" : "play.fill")

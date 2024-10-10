@@ -144,7 +144,7 @@ class AudioPlayerModel: ObservableObject {
         }
     }
 
-    private func pause() {
+    func pause() {
         switch playerState {
         case .stopped:
             break
