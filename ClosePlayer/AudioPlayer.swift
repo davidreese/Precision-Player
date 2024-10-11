@@ -21,6 +21,8 @@ struct AudioPlayer: View {
 //        self.player = player
 //    }
     
+    @State var showsTimeRemaining: Bool = false
+    
     init(player: AVAudioPlayer, title: String, artist: String? = nil) {
         self.model = AudioPlayerModel(player: player, title: title, artist: artist)
     }
@@ -69,9 +71,45 @@ struct AudioPlayer: View {
 //                            .progressViewStyle(.linear)
 //                    }
                     
-                    Text(timeFormatted(totalSeconds: model.player.duration))
                     
-                    Spacer()
+                    Group {
+                        var seconds = showsTimeRemaining ? model.player.duration - model.player.currentTime : model.player.duration
+                        if seconds < 3600 {
+                            if !showsTimeRemaining {
+                                HStack {
+                                    Text(timeFormatted(totalSeconds: model.player.duration))
+                                    Spacer()
+                                }
+                                .frame(width: 45)
+                            } else {
+                                HStack {
+                                    Text("-" + timeFormatted(totalSeconds: model.player.duration - model.player.currentTime))
+                                    Spacer()
+                                }
+                                .frame(width: 53)
+                            }
+                        } else {
+                            if !showsTimeRemaining {
+                                HStack {
+                                    Text(timeFormatted(totalSeconds: model.player.duration))
+                                    Spacer()
+                                }
+                                .frame(width: 65)
+                            } else {
+                                HStack {
+                                    Text("-" + timeFormatted(totalSeconds: model.player.duration - model.player.currentTime))
+                                    Spacer()
+                                }
+                                .frame(width: 73)
+                            }
+                        }
+                    }
+                    .onTapGesture {
+                        showsTimeRemaining.toggle()
+                    }
+                    
+                    
+//                    Spacer()
                     
                 }
             }

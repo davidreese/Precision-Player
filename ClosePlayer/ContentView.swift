@@ -12,7 +12,7 @@ import Combine
 
 
 struct ContentView: View {
-    @StateObject private var model: ContentModel = ContentModel()
+    @ObservedObject private var model: ContentModel = ContentModel()
 //    @StateObject private var player: Player = Player()
 //    @State private var url: URL?
     @State private var player: AVAudioPlayer?
@@ -34,6 +34,10 @@ struct ContentView: View {
     
     @State private var selectedSpeed: String = "1.0" // Default selection
     let speeds: [String] = ["0.5", "1.0", "1.25", "1.5", "2.0", "3.0"]
+    
+    init () {
+        model.startUpdating()
+    }
     
     var body: some View {
         VStack {

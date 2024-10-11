@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFAudio
+import SwiftUI
 
 class ContentModel: ObservableObject {
     
@@ -20,8 +21,11 @@ class ContentModel: ObservableObject {
     }
     
     func startUpdating() {
+        timer?.invalidate()
         self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            self.objectWillChange.send()
+            withAnimation {
+                self.objectWillChange.send()
+            }
         }
     }
 }
