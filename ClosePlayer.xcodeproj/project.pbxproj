@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F20157EF2A3C9720007000B6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20157EE2A3C9720007000B6 /* AVKit.framework */; };
+		F2246D1E2CBFF8E7006B099E /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2246D1D2CBFF8DF006B099E /* UI.swift */; };
 		F227C0A62BC96097006A7468 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F227C0A52BC96097006A7468 /* AudioPlayer.swift */; };
 		F25E1FBD2C7F517100BF3F44 /* ConfigAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FB82C7F517100BF3F44 /* ConfigAsset.swift */; };
 		F25E1FBE2C7F517100BF3F44 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E1FB92C7F517100BF3F44 /* ConfigCommand.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		F20157EE2A3C9720007000B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		F2246D1D2CBFF8DF006B099E /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		F227C0A52BC96097006A7468 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		F25E1FB52C7F46AC00BF3F44 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F25E1FB82C7F517100BF3F44 /* ConfigAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigAsset.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				F2BF27CE2C6C333F00610BC6 /* NowPlayable */,
 				F2FDD1D62A3ABC840040360C /* ClosePlayerApp.swift */,
+				F2246D1D2CBFF8DF006B099E /* UI.swift */,
 				F25E1FB52C7F46AC00BF3F44 /* Info.plist */,
 				F2FDD1D82A3ABC840040360C /* ContentView.swift */,
 				F227C0A52BC96097006A7468 /* AudioPlayer.swift */,
@@ -346,6 +349,7 @@
 				F2BF27D32C6C333F00610BC6 /* NowPlayableMetadata.swift in Sources */,
 				F287724A2CB776FE00CBECF6 /* MacNowPlayableBehavior.swift in Sources */,
 				F25E1FBD2C7F517100BF3F44 /* ConfigAsset.swift in Sources */,
+				F2246D1E2CBFF8E7006B099E /* UI.swift in Sources */,
 				F2FDD1D72A3ABC840040360C /* ClosePlayerApp.swift in Sources */,
 				F2FA3D632C6B81BE008A6859 /* AudioPlayerModel.swift in Sources */,
 				F2BF27D52C6C333F00610BC6 /* NowPlayableError.swift in Sources */,

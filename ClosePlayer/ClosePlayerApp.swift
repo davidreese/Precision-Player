@@ -14,6 +14,7 @@ struct ClosePlayerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .background(VisualEffectView().ignoresSafeArea())
         }
     }
 }

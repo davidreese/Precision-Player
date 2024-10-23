@@ -35,6 +35,8 @@ class AudioPlayerModel: ObservableObject {
 
     // Metadata for the audio item
     private var staticMetadata: NowPlayableStaticMetadata!
+    
+    var onTimeChange: ((TimeInterval) -> Void)?
 
     init(player: AVAudioPlayer, title: String, artist: String? = nil) {
         if let shared = ConfigModel.shared {
@@ -119,6 +121,7 @@ class AudioPlayerModel: ObservableObject {
         )
 
         nowPlayableBehavior.handleNowPlayablePlaybackChange(playing: isPlaying, metadata: metadata)
+        onTimeChange?(player.currentTime)
     }
     
 //    func play() {
@@ -204,13 +207,32 @@ class AudioPlayerModel: ObservableObject {
             guard let event = event as? MPChangePlaybackRateCommandEvent else { return .commandFailed }
             setPlaybackRate(event.playbackRate)
 
+        case .skipBackward:
+            guard let event = event as? MPSkipIntervalCommandEvent else { return .commandFailed }
+            skipBackward(interval: event.interval)
+            
+        case .skipForward:
+            guard let event = event as? MPSkipIntervalCommandEvent else { return .commandFailed }
+            skipForward(interval: event.interval)
         // ... (handle other commands as needed)
+        /*case .nextTrack:
+            skipForward(interval: 15)
+        case .previousTrack:
+            skipBackward(interval: 15)*/
 
         default:
             break
         }
 
         return .success
+    }
+    
+    func skipBackward(interval: TimeInterval) {
+        player.currentTime -= interval
+    }
+    
+    func skipForward(interval: TimeInterval) {
+        player.currentTime += interval
     }
 
     func setPlaybackRate(_ rate: Float) {

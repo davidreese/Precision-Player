@@ -11,11 +11,12 @@ import SwiftUI
 
 class ContentModel: ObservableObject {
     
-    var timer: Timer? = nil
+//    var timer: Timer? = nil
     
     init() {
     }
     
+    /*
     func stopUpdating() {
         timer?.invalidate()
     }
@@ -27,5 +28,5 @@ class ContentModel: ObservableObject {
                 self.objectWillChange.send()
             }
         }
-    }
+    }*/
 }

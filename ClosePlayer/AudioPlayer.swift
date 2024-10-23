@@ -14,7 +14,7 @@ struct AudioPlayer: View {
     @ObservedObject private(set) var model: AudioPlayerModel
     
     struct UI {
-        static let cornerRadius = 6.0
+        static let cornerRadius = 8.0
     }
     
 //    init(player: StateObject<Player>) {
@@ -29,9 +29,10 @@ struct AudioPlayer: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: UI.cornerRadius)
-            .fill(Color.gray)
+            .fill(.thickMaterial)
             .shadow(radius: 3)
             .frame(height: 60)
+            .frame(minWidth: 300)
             .overlay {
                 HStack(spacing: 10) {
                     Spacer()
@@ -49,6 +50,8 @@ struct AudioPlayer: View {
                             .frame(width: 15)
                     }).buttonStyle(.borderless)
                     
+                    Divider().padding(.vertical)
+                    
                     if model.player.currentTime < 3600 {
                         HStack {
                             Text(timeFormatted(totalSeconds: model.player.currentTime))
@@ -63,17 +66,18 @@ struct AudioPlayer: View {
                         .frame(width: 65)
                     }
                     
-//                    if let currentTime = model.player.currentTime, let duration = model.player.duration {
+                    VStack {
+                        Spacer()
                         ProgressView(value: model.player.currentTime, total: model.player.duration)
-                            .progressViewStyle(.linear)
-//                    } else {
-//                        ProgressView(value: 0, total: 1)
-//                            .progressViewStyle(.linear)
-//                    }
+                            .progressViewStyle(FocusedLinearProgressViewStyle())
+//                            .background(.green)
+                        Spacer()
+                    }
+                  
                     
                     
                     Group {
-                        var seconds = showsTimeRemaining ? model.player.duration - model.player.currentTime : model.player.duration
+                        let seconds = showsTimeRemaining ? model.player.duration - model.player.currentTime : model.player.duration
                         if seconds < 3600 {
                             if !showsTimeRemaining {
                                 HStack {
@@ -114,6 +118,11 @@ struct AudioPlayer: View {
                 }
             }
         
+    }
+    
+    func onTimeChange(action: @escaping (TimeInterval) -> Void) -> AudioPlayer {
+        model.onTimeChange = action
+        return self
     }
         
     func setRate(_ rate: Float) {

@@ -36,14 +36,20 @@ struct ContentView: View {
     let speeds: [String] = ["0.5", "1.0", "1.25", "1.5", "2.0", "3.0"]
     
     init () {
-        model.startUpdating()
+//        model.startUpdating()
     }
     
     var body: some View {
         VStack {
             if let audioPlayer = audioPlayer {
                 audioPlayer
+                    .onTimeChange(action: { time in
+                        withAnimation {
+                            model.objectWillChange.send()
+                        }
+                    })
                     .padding(.horizontal)
+                    .padding(.bottom)
             }
 //            VideoPlayer(player: url != nil ? AVPlayer(url: url!) : nil)
 //                .onChange(of: player.avPlayer?.rate, { oldValue, newValue in
@@ -52,9 +58,9 @@ struct ContentView: View {
 //                .cornerRadius(5)
                 
             
-            HStack {
+            VStack {
                 VStack {
-                    Spacer()
+//                    Spacer()
                     
                     Group {
                         HStack {
@@ -169,21 +175,21 @@ struct ContentView: View {
                         
                         Spacer()
                     }
-                    Spacer()
+//                    Spacer()
                     
                     
-                    HStack {
+//                    HStack {
 //                        if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
 //                            ProgressView()
 //                            Spacer()
 //                        }
-                    }
+//                    }
                 }.padding(.horizontal)
                 
                 Divider()
                 
                 VStack {
-                    Spacer()
+//                    Spacer()
                     HStack {
                         if let audioPlayer {
                             Text("TIME: \(audioPlayer.model.player.currentTime.rounded().formatted())")
@@ -229,10 +235,11 @@ struct ContentView: View {
                     }
                     
                     Spacer()
-                }
+                }.padding()
             }
         }
         .padding(.vertical)
+        .frame(minWidth: 350, minHeight: 400)
         .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video, .movie, .mp3], onCompletion: { result in
             do {
                 let url = try result.get()
@@ -263,7 +270,7 @@ struct ContentView: View {
     
     func play() {
         audioPlayer?.play()
-        model.startUpdating()
+//        model.startUpdating()
     }
 }
 
