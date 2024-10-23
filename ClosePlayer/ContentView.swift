@@ -30,6 +30,7 @@ struct ContentView: View {
     
     @State private var seekValue = ""
     @State private var jumpToValue = ""
+    @State private var offsetValue = ""
     @State private var filename: String? = nil
     
     @State private var selectedSpeed: String = "1.0" // Default selection
@@ -139,19 +140,48 @@ struct ContentView: View {
                             .onSubmit {
                                 print("Jumping...")
                                 
+                                let offsetRes: Double? = Double(offsetValue.replacingOccurrences(of: "–", with: "-"))
+                                if !offsetValue.isEmpty {
+                                    if offsetRes == nil {
+                                        print("Invalid offset value")
+                                        return
+                                    }
+                                }
+                                
+                                let offset = offsetRes ?? 0.0
+                                print("Offset: \(offset)")
+                                
                                 if let jumpToInSeconds = Double(jumpToValue) {
-                                    player?.currentTime = jumpToInSeconds
+                                    player?.currentTime = jumpToInSeconds + offset
 //                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
                                     jumpToValue = ""
                                     play()
                                 } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
-                                    player?.currentTime = jumpToTI
+                                    player?.currentTime = jumpToTI + offset
 //                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
                                     jumpToValue = ""
                                     play()
                                 }
                             }
-                            .frame(maxWidth: 200)
+                            .frame(maxWidth: 135)
+                        TextField("Offset", text: self.$offsetValue)
+                            .onReceive(Just(offsetValue)) { newValue in
+                                var filtered = newValue.filter { "–-+0123456789".contains($0) }
+                                if offsetValue.count == 1 {
+                                    filtered = newValue.filter { "+-–".contains($0) }
+                                } else if offsetValue.count > 1 {
+                                    var newValueWithoutFirst = newValue
+                                    let first = newValueWithoutFirst.removeFirst()
+                                    
+                                    let filteredWithoutFirst = newValueWithoutFirst.filter { "0123456789".contains($0) }
+                                    filtered = String(first) + filteredWithoutFirst
+                                }
+                                
+                                if filtered != newValue {
+                                    self.offsetValue = filtered
+                                }
+                            }
+                            .frame(maxWidth: 65)
                         
                         Spacer()
                     }
