@@ -129,6 +129,7 @@ struct ContentView: View {
                     }
                     
                     HStack {
+                        HStack {
                         TextField("Jump to", text: self.$jumpToValue)
                         //                        .keyboardType(.numberPad)
                             .onReceive(Just(jumpToValue)) { newValue in
@@ -153,17 +154,17 @@ struct ContentView: View {
                                 
                                 if let jumpToInSeconds = Double(jumpToValue) {
                                     player?.currentTime = jumpToInSeconds + offset
-//                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
+                                    //                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
                                     jumpToValue = ""
                                     play()
                                 } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
                                     player?.currentTime = jumpToTI + offset
-//                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
+                                    //                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
                                     jumpToValue = ""
                                     play()
                                 }
                             }
-                            .frame(maxWidth: 135)
+                            .frame(width: 130)
                         TextField("Offset", text: self.$offsetValue)
                             .onReceive(Just(offsetValue)) { newValue in
                                 var filtered = newValue.filter { "–-+0123456789".contains($0) }
@@ -181,7 +182,8 @@ struct ContentView: View {
                                     self.offsetValue = filtered
                                 }
                             }
-                            .frame(maxWidth: 65)
+                        //                            .frame(maxWidth: 65)
+                    }.frame(maxWidth: 200)
                         
                         Spacer()
                     }
