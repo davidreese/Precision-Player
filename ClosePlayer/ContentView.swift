@@ -13,17 +13,17 @@ import Combine
 
 struct ContentView: View {
     @ObservedObject private var model: ContentModel = ContentModel()
-//    @StateObject private var player: Player = Player()
-//    @State private var url: URL?
+    //    @StateObject private var player: Player = Player()
+    //    @State private var url: URL?
     
-//    private var player: Binding<AVAudioPlayer?> = Binding {
-//        return nil
-//    } set: { val in
-//        not sure how to do this. currently just ripped out Player (commented out a lot of important lines in order to do that) and im trying to use AVAudioPlayer instead, but having a lot of trouble
-//    }
-
-//    @State private var audioPlayer: AudioPlayer?
-
+    //    private var player: Binding<AVAudioPlayer?> = Binding {
+    //        return nil
+    //    } set: { val in
+    //        not sure how to do this. currently just ripped out Player (commented out a lot of important lines in order to do that) and im trying to use AVAudioPlayer instead, but having a lot of trouble
+    //    }
+    
+    //    @State private var audioPlayer: AudioPlayer?
+    
     @State private var isPresentingFileImporter = false
     
     @State private var seekValue = ""
@@ -36,7 +36,7 @@ struct ContentView: View {
     let speeds: [String] = ["0.5", "1.0", "1.25", "1.5", "2.0", "3.0"]
     
     init () {
-//        model.startUpdating()
+        //        model.startUpdating()
     }
     
     var body: some View {
@@ -51,12 +51,12 @@ struct ContentView: View {
                     .padding(.horizontal)
                     .padding(.bottom)
             }
-//            VideoPlayer(player: url != nil ? AVPlayer(url: url!) : nil)
-//                .onChange(of: player.avPlayer?.rate, { oldValue, newValue in
-//                    print("RATE: \(player.avPlayer?.rate)")
-//                })
-//                .cornerRadius(5)
-                
+            //            VideoPlayer(player: url != nil ? AVPlayer(url: url!) : nil)
+            //                .onChange(of: player.avPlayer?.rate, { oldValue, newValue in
+            //                    print("RATE: \(player.avPlayer?.rate)")
+            //                })
+            //                .cornerRadius(5)
+            
             
             VStack {
                 VStack {
@@ -122,7 +122,7 @@ struct ContentView: View {
                         Spacer()
                     }
                     
-                                        
+                    
                     Divider()
                     
                     VStack {
@@ -162,49 +162,47 @@ struct ContentView: View {
                                             model.play()
                                         }
                                     }
-    //                                .frame(width: 130)
-                                                            //                            .frame(maxWidth: 65)
+                                //                                .frame(width: 130)
+                                //                            .frame(maxWidth: 65)
                             }.frame(maxWidth: 200)
                             
                             Spacer()
                         }
-
+                        
                         HStack {
-                        HStack {
-                            
-                            
-                            TextField("Offset", text: self.$offsetValue)
-                                .disabled(!offsetIsOn)
-                                .onReceive(Just(offsetValue)) { newValue in
-                                    var filtered = newValue.filter { "–-+0123456789".contains($0) }
-                                    if offsetValue.count == 1 {
-                                        filtered = newValue.filter { "+-–".contains($0) }
-                                    } else if offsetValue.count > 1 {
-                                        var newValueWithoutFirst = newValue
-                                        let first = newValueWithoutFirst.removeFirst()
+                            HStack {
+                                TextField("Offset", text: self.$offsetValue)
+                                    .disabled(!offsetIsOn)
+                                    .onReceive(Just(offsetValue)) { newValue in
+                                        var filtered = newValue.filter { "–-+0123456789".contains($0) }
+                                        if offsetValue.count == 1 {
+                                            filtered = newValue.filter { "+-–".contains($0) }
+                                        } else if offsetValue.count > 1 {
+                                            var newValueWithoutFirst = newValue
+                                            let first = newValueWithoutFirst.removeFirst()
+                                            
+                                            let filteredWithoutFirst = newValueWithoutFirst.filter { "0123456789".contains($0) }
+                                            filtered = String(first) + filteredWithoutFirst
+                                        }
                                         
-                                        let filteredWithoutFirst = newValueWithoutFirst.filter { "0123456789".contains($0) }
-                                        filtered = String(first) + filteredWithoutFirst
+                                        if filtered != newValue {
+                                            self.offsetValue = filtered
+                                        }
+                                    }//.frame(maxWidth: 100)
+                                
+                                Toggle(isOn: $offsetIsOn, label: {
+                                    if offsetIsOn {
+                                        Image(systemName: "lightswitch.on")
+                                    } else {
+                                        Image(systemName: "lightswitch.off")
                                     }
-                                    
-                                    if filtered != newValue {
-                                        self.offsetValue = filtered
-                                    }
-                                }//.frame(maxWidth: 100)
-                            
-                            Toggle(isOn: $offsetIsOn, label: {
-                                if offsetIsOn {
-                                    Image(systemName: "lightswitch.on")
-                                } else {
-                                    Image(systemName: "lightswitch.off")
-                                }
-                            })
+                                })
                                 .toggleStyle(.button)
-                        }.frame(maxWidth: 200)
-
-                        Spacer()
+                            }.frame(maxWidth: 200)
+                            
+                            Spacer()
+                        }
                     }
-                }
                     Divider()
                     
                     //                    Spacer()
@@ -217,76 +215,76 @@ struct ContentView: View {
                         }
                         .pickerStyle(MenuPickerStyle())
                         .onChange(of: selectedSpeed) {
-//                            player.setRate(Float(value)!)
-//                            player!.pause()
-//                            player?.rate = Float(selectedSpeed)!
+                            //                            player.setRate(Float(value)!)
+                            //                            player!.pause()
+                            //                            player?.rate = Float(selectedSpeed)!
                             model.audioPlayer?.setRate(Float(selectedSpeed)!)
                         }
                         .frame(maxWidth: 200)
                         
                         Spacer()
                     }
-//                    Spacer()
-                    
-                    
-//                    HStack {
-//                        if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
-//                            ProgressView()
-//                            Spacer()
-//                        }
-//                    }
-                }.padding(.horizontal)
-                
-                Divider()
-                
-                VStack {
-//                    Spacer()
-                    HStack {
-                        if let audioPlayer = model.audioPlayer {
-                            Text("TIME: \(audioPlayer.model.player.currentTime.rounded().formatted())")
-                        } else {
-                            Text("TIME: nil")
-                        }
-                        Spacer()
-                    }
-                    
                     //                    Spacer()
                     
-                    HStack {
-                        let color: Color = {
-                            guard let savedSeconds = model.heldTime, let audioPlayer = model.audioPlayer else {
-                                return Color.primary
-                            }
-                            
-                            let diff = audioPlayer.model.player.currentTime - savedSeconds
-                            if diff < -10 {
-                                return Color.orange
-                            } else if diff < 0.3 && diff > -1 {
-                                return Color.cyan
-                            } else if diff > 250 {
-                                return Color.red
+                    
+                    //                    HStack {
+                    //                        if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
+                    //                            ProgressView()
+                    //                            Spacer()
+                    //                        }
+                    //                    }
+                    
+                    
+                    Divider()
+                    
+                    VStack {
+                        HStack {
+                            if let audioPlayer = model.audioPlayer {
+                                Text("TIME: \(audioPlayer.model.player.currentTime.rounded().formatted())")
                             } else {
-                                return Color.primary
+                                Text("TIME: nil")
                             }
-                        }()
-                        Text("HELD: \(model.heldTime?.rounded().formatted() ?? "nil")")
-                            .foregroundColor(color)
-                        Spacer()
-                    }
-                    
-                    //                    Spacer()
-                    
-                    HStack {
-                        if let audioPlayer = model.audioPlayer {
-                            Text("DURATION: \(audioPlayer.model.player.duration.rounded().formatted())")
-                        } else {
-                            Text("DURATION: nil")
+                            Spacer()
                         }
+                        
+                        //                    Spacer()
+                        
+                        HStack {
+                            let color: Color = {
+                                guard let savedSeconds = model.heldTime, let audioPlayer = model.audioPlayer else {
+                                    return Color.primary
+                                }
+                                
+                                let diff = audioPlayer.model.player.currentTime - savedSeconds
+                                if diff < -10 {
+                                    return Color.orange
+                                } else if diff < 0.3 && diff > -1 {
+                                    return Color.cyan
+                                } else if diff > 250 {
+                                    return Color.red
+                                } else {
+                                    return Color.primary
+                                }
+                            }()
+                            Text("HELD: \(model.heldTime?.rounded().formatted() ?? "nil")")
+                                .foregroundColor(color)
+                            Spacer()
+                        }
+                        
+                        //                    Spacer()
+                        
+                        HStack {
+                            if let audioPlayer = model.audioPlayer {
+                                Text("DURATION: \(audioPlayer.model.player.duration.rounded().formatted())")
+                            } else {
+                                Text("DURATION: nil")
+                            }
+                            Spacer()
+                        }
+                        
                         Spacer()
-                    }
-                    
-                    Spacer()
-                }.padding()
+                    }.padding(.top)
+                }.padding(.horizontal)
             }
         }
         .padding(.vertical)
@@ -294,7 +292,7 @@ struct ContentView: View {
         .fileImporter(isPresented: $isPresentingFileImporter, allowedContentTypes: [.audio, .mpeg4Movie, .video, .movie, .mp3], onCompletion: { result in
             do {
                 let url = try result.get()
-
+                
                 guard url.startAccessingSecurityScopedResource() else {return}
                 
                 let player = try AVAudioPlayer(contentsOf: url)
@@ -313,10 +311,10 @@ struct ContentView: View {
                 
                 self.model.player = player
                 
-//                self.url = url
+                //                self.url = url
                 self.model.heldTime = nil
                 
-//                print(self.player.avPlayer)
+                //                print(self.player.avPlayer)
             } catch {
                 print("Error importing audio file: \(error)")
             }
