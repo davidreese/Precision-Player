@@ -12,7 +12,7 @@ import Combine
 
 
 struct ContentView: View {
-    @EnvironmentObject private var model: ContentModel
+    @ObservedObject private var model: ContentModel = ContentModel()
 //    @StateObject private var player: Player = Player()
 //    @State private var url: URL?
     
@@ -22,7 +22,7 @@ struct ContentView: View {
 //        not sure how to do this. currently just ripped out Player (commented out a lot of important lines in order to do that) and im trying to use AVAudioPlayer instead, but having a lot of trouble
 //    }
 
-    @State private var audioPlayer: AudioPlayer?
+//    @State private var audioPlayer: AudioPlayer?
 
     @State private var isPresentingFileImporter = false
     
@@ -41,7 +41,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if let audioPlayer = audioPlayer {
+            if let audioPlayer = model.audioPlayer {
                 audioPlayer
                     .onTimeChange(action: { time in
                         withAnimation {
@@ -174,6 +174,7 @@ struct ContentView: View {
                             
                             
                             TextField("Offset", text: self.$offsetValue)
+                                .disabled(!offsetIsOn)
                                 .onReceive(Just(offsetValue)) { newValue in
                                     var filtered = newValue.filter { "–-+0123456789".contains($0) }
                                     if offsetValue.count == 1 {
@@ -219,7 +220,7 @@ struct ContentView: View {
 //                            player.setRate(Float(value)!)
 //                            player!.pause()
 //                            player?.rate = Float(selectedSpeed)!
-                            audioPlayer?.setRate(Float(selectedSpeed)!)
+                            model.audioPlayer?.setRate(Float(selectedSpeed)!)
                         }
                         .frame(maxWidth: 200)
                         
@@ -241,7 +242,7 @@ struct ContentView: View {
                 VStack {
 //                    Spacer()
                     HStack {
-                        if let audioPlayer {
+                        if let audioPlayer = model.audioPlayer {
                             Text("TIME: \(audioPlayer.model.player.currentTime.rounded().formatted())")
                         } else {
                             Text("TIME: nil")
@@ -253,7 +254,7 @@ struct ContentView: View {
                     
                     HStack {
                         let color: Color = {
-                            guard let savedSeconds = model.heldTime, let audioPlayer else {
+                            guard let savedSeconds = model.heldTime, let audioPlayer = model.audioPlayer else {
                                 return Color.primary
                             }
                             
@@ -276,7 +277,7 @@ struct ContentView: View {
                     //                    Spacer()
                     
                     HStack {
-                        if let audioPlayer {
+                        if let audioPlayer = model.audioPlayer {
                             Text("DURATION: \(audioPlayer.model.player.duration.rounded().formatted())")
                         } else {
                             Text("DURATION: nil")
@@ -302,11 +303,11 @@ struct ContentView: View {
                 
                 self.filename = url.lastPathComponent
                 
-                if self.audioPlayer == nil {
-                    self.audioPlayer = AudioPlayer(player: player, title: filename!, artist: nil)
-                    self.audioPlayer?.setRate(Float(selectedSpeed)!)
+                if self.model.audioPlayer == nil {
+                    self.model.audioPlayer = AudioPlayer(player: player, title: filename!, artist: nil)
+                    self.model.audioPlayer!.setRate(Float(selectedSpeed)!)
                 } else {
-                    self.audioPlayer?.swap(player: player, title: filename!, artist: nil)
+                    self.model.audioPlayer!.swap(player: player, title: filename!, artist: nil)
                     self.offsetValue = ""
                 }
                 

@@ -12,7 +12,7 @@ import SwiftUI
 class ContentModel: ObservableObject {
     @Published var heldTime: TimeInterval? = nil
     @Published var player: AVAudioPlayer?
-    @Published private(set) var audioPlayer: AudioPlayer?
+    @Published var audioPlayer: AudioPlayer?
 //    var timer: Timer? = nil
     
     init() {

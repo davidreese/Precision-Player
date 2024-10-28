@@ -10,7 +10,6 @@ import AVKit
 
 @main
 struct ClosePlayerApp: App {
-    @StateObject var contentViewModel = ContentModel()
     
 //    @FocusState private var isFocused: Bool
     
@@ -19,21 +18,6 @@ struct ClosePlayerApp: App {
             let contentViewModel = ContentModel()
             ContentView()
                 .background(VisualEffectView().ignoresSafeArea())
-                .environmentObject(contentViewModel)
-//                .focused($isFocused)
-                /*.toolbar {
-                    ToolbarItemGroup(placement: .principal) {
-                                Button("Hold") {
-                                    contentViewModel.hold()
-                                }
-                                .keyboardShortcut(.init("h"), modifiers: [.command, .shift])
-                                
-                                Button("Return") {
-                                    contentViewModel.returnAndPlay()
-                                }
-                                .keyboardShortcut(.init("r"), modifiers: [.command, .shift])
-                            }
-                        }*/
         }
     }
 }
