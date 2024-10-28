@@ -92,6 +92,8 @@ struct ContentView: View {
                     
                     //                    Spacer()
                     
+                    Divider()
+                    
                     HStack {
                         TextField("Seek", text: self.$seekValue)
                         //                        .keyboardType(.numberPad)
@@ -314,13 +316,13 @@ struct ContentView: View {
                     self.audioPlayer?.setRate(Float(selectedSpeed)!)
                 } else {
                     self.audioPlayer?.swap(player: player, title: filename!, artist: nil)
+                    self.offsetValue = ""
                 }
                 
                 self.player = player
                 
 //                self.url = url
                 self.heldTime = nil
-                self.offsetValue = ""
                 
                 
                 
