@@ -10,23 +10,28 @@ import AVFAudio
 import SwiftUI
 
 class ContentModel: ObservableObject {
-    
+    @Published var heldTime: TimeInterval? = nil
+    @Published var player: AVAudioPlayer?
+    @Published private(set) var audioPlayer: AudioPlayer?
 //    var timer: Timer? = nil
     
     init() {
     }
     
-    /*
-    func stopUpdating() {
-        timer?.invalidate()
+    func hold() {
+        self.heldTime = player?.currentTime
     }
     
-    func startUpdating() {
-        timer?.invalidate()
-        self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            withAnimation {
-                self.objectWillChange.send()
-            }
+    func returnAndPlay() {
+        guard let savedTime = heldTime else {
+            return
         }
-    }*/
+        player?.currentTime = savedTime - 2
+        play()
+    }
+    
+    func play() {
+        audioPlayer?.play()
+//        model.startUpdating()
+    }
 }

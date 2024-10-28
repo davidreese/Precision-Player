@@ -12,10 +12,10 @@ import Combine
 
 
 struct ContentView: View {
-    @ObservedObject private var model: ContentModel = ContentModel()
+    @EnvironmentObject private var model: ContentModel
 //    @StateObject private var player: Player = Player()
 //    @State private var url: URL?
-    @State private var player: AVAudioPlayer?
+    
 //    private var player: Binding<AVAudioPlayer?> = Binding {
 //        return nil
 //    } set: { val in
@@ -25,8 +25,6 @@ struct ContentView: View {
     @State private var audioPlayer: AudioPlayer?
 
     @State private var isPresentingFileImporter = false
-    
-    @State private var heldTime: TimeInterval? = nil
     
     @State private var seekValue = ""
     @State private var jumpToValue = ""
@@ -71,26 +69,20 @@ struct ContentView: View {
                             }
                             
                             Spacer()
-                            //                            Text(filename ?? "")
                         }
                         HStack {
                             Button("Hold") {
-                                self.heldTime = player?.currentTime
-                            }
+                                model.hold()
+                            }.keyboardShortcut(.init("h"), modifiers: [.command, .shift])
+                            
                             Button("Return") {
-                                //                                print(player.avPlayer)
-                                guard let savedTime = heldTime else {
-                                    return
-                                }
-                                player?.currentTime = savedTime - 2
-                                play()
-                            }
+                                model.returnAndPlay()
+                            }.keyboardShortcut(.init("r"), modifiers: [.command, .shift])
+                            
                             Spacer()
                         }
                         
                     }
-                    
-                    //                    Spacer()
                     
                     Divider()
                     
@@ -114,8 +106,7 @@ struct ContentView: View {
                             .onSubmit {
                                 print("Seeking...")
                                 
-                                
-                                guard let player = player, let diff = Double(seekValue.replacingOccurrences(of: "–", with: "-")) else {
+                                guard let player = model.player, let diff = Double(seekValue.replacingOccurrences(of: "–", with: "-")) else {
                                     print("Invalid seek input")
                                     return
                                 }
@@ -124,7 +115,7 @@ struct ContentView: View {
                                 
                                 //                                player.scrub(seconds: diff)
                                 seekValue = "-"
-                                play()
+                                model.play()
                             }
                             .frame(maxWidth: 200)
                         
@@ -160,15 +151,15 @@ struct ContentView: View {
                                         print("Offset: \(offset)")
                                         
                                         if let jumpToInSeconds = Double(jumpToValue) {
-                                            player?.currentTime = jumpToInSeconds + offset
+                                            model.player?.currentTime = jumpToInSeconds + offset
                                             //                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
                                             jumpToValue = ""
-                                            play()
+                                            model.play()
                                         } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
-                                            player?.currentTime = jumpToTI + offset
+                                            model.player?.currentTime = jumpToTI + offset
                                             //                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
                                             jumpToValue = ""
-                                            play()
+                                            model.play()
                                         }
                                     }
     //                                .frame(width: 130)
@@ -262,7 +253,7 @@ struct ContentView: View {
                     
                     HStack {
                         let color: Color = {
-                            guard let savedSeconds = heldTime, let audioPlayer else {
+                            guard let savedSeconds = model.heldTime, let audioPlayer else {
                                 return Color.primary
                             }
                             
@@ -277,7 +268,7 @@ struct ContentView: View {
                                 return Color.primary
                             }
                         }()
-                        Text("HELD: \(heldTime?.rounded().formatted() ?? "nil")")
+                        Text("HELD: \(model.heldTime?.rounded().formatted() ?? "nil")")
                             .foregroundColor(color)
                         Spacer()
                     }
@@ -319,23 +310,16 @@ struct ContentView: View {
                     self.offsetValue = ""
                 }
                 
-                self.player = player
+                self.model.player = player
                 
 //                self.url = url
-                self.heldTime = nil
-                
-                
+                self.model.heldTime = nil
                 
 //                print(self.player.avPlayer)
             } catch {
                 print("Error importing audio file: \(error)")
             }
         })
-    }
-    
-    func play() {
-        audioPlayer?.play()
-//        model.startUpdating()
     }
 }
 
