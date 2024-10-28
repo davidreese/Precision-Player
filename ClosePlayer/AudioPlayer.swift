@@ -133,6 +133,10 @@ struct AudioPlayer: View {
         model.play()
     }
     
+    func swap(player: AVAudioPlayer, title: String, artist: String? = nil) {
+        self.model.swap(player: player, title: title, artist: artist)
+    }
+    
     
     /// Imported from YTS-App
     func timeFormatted(totalSeconds: TimeInterval?) -> String {

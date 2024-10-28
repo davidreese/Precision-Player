@@ -17,7 +17,7 @@ class AudioPlayerModel: ObservableObject {
 
     unowned let nowPlayableBehavior: NowPlayable
 
-    @Published var player: AVAudioPlayer
+    @Published var player: AVAudioPlayer!
 
     private var playerState: PlayerState = .stopped {
         didSet {
@@ -45,21 +45,7 @@ class AudioPlayerModel: ObservableObject {
             self.nowPlayableBehavior = ConfigModel(nowPlayableBehavior: MacNowPlayableBehavior()).nowPlayableBehavior
         }
         
-        self.player = player
-//        self.staticMetadata = metadata
-        
-        
-        itemChanged(title: title, artist: artist)
-        
-        /*
-        if self.player != nil {
-            do {
-                try handleNowPlayableSessionStart()
-                play()
-            } catch {
-                print("Error starting NowPlayable session or playing: \(error)")
-            }
-        }*/
+        load(player: player, title: title, artist: artist)
     }
     
     func itemChanged(title: String, artist: String? = nil) {
@@ -93,12 +79,24 @@ class AudioPlayerModel: ObservableObject {
         }
     }
 
-    func optOut() {
+    private func optOut() {
         timer?.invalidate()
         timer = nil
         player.stop()
         playerState = .stopped
         nowPlayableBehavior.handleNowPlayableSessionEnd()
+    }
+    
+    private func load(player: AVAudioPlayer, title: String, artist: String?) {
+        self.player = player
+//        self.staticMetadata = metadata
+        
+        itemChanged(title: title, artist: artist)
+    }
+    
+    func swap(player: AVAudioPlayer, title: String, artist: String? = nil) {
+        optOut()
+        load(player: player, title: title, artist: artist)
     }
 
     // MARK: Now Playing Info

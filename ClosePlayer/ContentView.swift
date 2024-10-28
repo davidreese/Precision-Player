@@ -283,8 +283,13 @@ struct ContentView: View {
                 player.prepareToPlay()
                 
                 self.filename = url.lastPathComponent
-                self.audioPlayer = AudioPlayer(player: player, title: filename!, artist: nil)
-                self.audioPlayer?.setRate(Float(selectedSpeed)!)
+                
+                if self.audioPlayer == nil {
+                    self.audioPlayer = AudioPlayer(player: player, title: filename!, artist: nil)
+                    self.audioPlayer?.setRate(Float(selectedSpeed)!)
+                } else {
+                    self.audioPlayer?.swap(player: player, title: filename!, artist: nil)
+                }
                 
                 self.player = player
                 
