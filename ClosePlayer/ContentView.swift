@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var seekValue = ""
     @State private var jumpToValue = ""
     @State private var offsetValue = ""
+    @State private var offsetIsOn: Bool = true
     @State private var filename: String? = nil
     
     @State private var selectedSpeed: String = "1.0" // Default selection
@@ -61,7 +62,7 @@ struct ContentView: View {
             
             VStack {
                 VStack {
-//                    Spacer()
+                    //                    Spacer()
                     
                     Group {
                         HStack {
@@ -70,14 +71,14 @@ struct ContentView: View {
                             }
                             
                             Spacer()
-//                            Text(filename ?? "")
+                            //                            Text(filename ?? "")
                         }
                         HStack {
                             Button("Hold") {
                                 self.heldTime = player?.currentTime
                             }
                             Button("Return") {
-//                                print(player.avPlayer)
+                                //                                print(player.avPlayer)
                                 guard let savedTime = heldTime else {
                                     return
                                 }
@@ -119,7 +120,7 @@ struct ContentView: View {
                                 
                                 player.currentTime = player.currentTime + diff
                                 
-//                                player.scrub(seconds: diff)
+                                //                                player.scrub(seconds: diff)
                                 seekValue = "-"
                                 play()
                             }
@@ -128,65 +129,89 @@ struct ContentView: View {
                         Spacer()
                     }
                     
-                    HStack {
+                                        
+                    Divider()
+                    
+                    VStack {
                         HStack {
-                        TextField("Jump to", text: self.$jumpToValue)
-                        //                        .keyboardType(.numberPad)
-                            .onReceive(Just(jumpToValue)) { newValue in
-                                let filtered = newValue.filter { ":0123456789".contains($0) }
-                                if filtered != newValue {
-                                    self.jumpToValue = filtered
-                                }
-                            }
-                            .onSubmit {
-                                print("Jumping...")
-                                
-                                let offsetRes: Double? = Double(offsetValue.replacingOccurrences(of: "–", with: "-"))
-                                if !offsetValue.isEmpty {
-                                    if offsetRes == nil {
-                                        print("Invalid offset value")
-                                        return
+                            HStack {
+                                TextField("Jump to", text: self.$jumpToValue)
+                                //                        .keyboardType(.numberPad)
+                                    .onReceive(Just(jumpToValue)) { newValue in
+                                        let filtered = newValue.filter { ":0123456789".contains($0) }
+                                        if filtered != newValue {
+                                            self.jumpToValue = filtered
+                                        }
                                     }
-                                }
-                                
-                                let offset = offsetRes ?? 0.0
-                                print("Offset: \(offset)")
-                                
-                                if let jumpToInSeconds = Double(jumpToValue) {
-                                    player?.currentTime = jumpToInSeconds + offset
-                                    //                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
-                                    jumpToValue = ""
-                                    play()
-                                } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
-                                    player?.currentTime = jumpToTI + offset
-                                    //                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
-                                    jumpToValue = ""
-                                    play()
-                                }
-                            }
-                            .frame(width: 130)
-                        TextField("Offset", text: self.$offsetValue)
-                            .onReceive(Just(offsetValue)) { newValue in
-                                var filtered = newValue.filter { "–-+0123456789".contains($0) }
-                                if offsetValue.count == 1 {
-                                    filtered = newValue.filter { "+-–".contains($0) }
-                                } else if offsetValue.count > 1 {
-                                    var newValueWithoutFirst = newValue
-                                    let first = newValueWithoutFirst.removeFirst()
+                                    .onSubmit {
+                                        print("Jumping...")
+                                        
+                                        let offsetRes: Double? = Double(offsetValue.replacingOccurrences(of: "–", with: "-"))
+                                        if !offsetValue.isEmpty {
+                                            if offsetRes == nil {
+                                                print("Invalid offset value")
+                                                return
+                                            }
+                                        }
+                                        
+                                        let offset = offsetIsOn ? offsetRes ?? 0.0 : 0.0
+                                        print("Offset: \(offset)")
+                                        
+                                        if let jumpToInSeconds = Double(jumpToValue) {
+                                            player?.currentTime = jumpToInSeconds + offset
+                                            //                                    player.scrub(to: CMTime(seconds: jumpToInSeconds, preferredTimescale: timeScale))
+                                            jumpToValue = ""
+                                            play()
+                                        } else if let jumpToTI = convertToTimeInterval(from: jumpToValue) {
+                                            player?.currentTime = jumpToTI + offset
+                                            //                                    player.scrub(to: CMTime(seconds: jumpToTI, preferredTimescale: timeScale))
+                                            jumpToValue = ""
+                                            play()
+                                        }
+                                    }
+    //                                .frame(width: 130)
+                                                            //                            .frame(maxWidth: 65)
+                            }.frame(maxWidth: 200)
+                            
+                            Spacer()
+                        }
+
+                        HStack {
+                        HStack {
+                            
+                            
+                            TextField("Offset", text: self.$offsetValue)
+                                .onReceive(Just(offsetValue)) { newValue in
+                                    var filtered = newValue.filter { "–-+0123456789".contains($0) }
+                                    if offsetValue.count == 1 {
+                                        filtered = newValue.filter { "+-–".contains($0) }
+                                    } else if offsetValue.count > 1 {
+                                        var newValueWithoutFirst = newValue
+                                        let first = newValueWithoutFirst.removeFirst()
+                                        
+                                        let filteredWithoutFirst = newValueWithoutFirst.filter { "0123456789".contains($0) }
+                                        filtered = String(first) + filteredWithoutFirst
+                                    }
                                     
-                                    let filteredWithoutFirst = newValueWithoutFirst.filter { "0123456789".contains($0) }
-                                    filtered = String(first) + filteredWithoutFirst
+                                    if filtered != newValue {
+                                        self.offsetValue = filtered
+                                    }
+                                }//.frame(maxWidth: 100)
+                            
+                            Toggle(isOn: $offsetIsOn, label: {
+                                if offsetIsOn {
+                                    Image(systemName: "lightswitch.on")
+                                } else {
+                                    Image(systemName: "lightswitch.off")
                                 }
-                                
-                                if filtered != newValue {
-                                    self.offsetValue = filtered
-                                }
-                            }
-                        //                            .frame(maxWidth: 65)
-                    }.frame(maxWidth: 200)
-                        
+                            })
+                                .toggleStyle(.button)
+                        }.frame(maxWidth: 200)
+
                         Spacer()
                     }
+                }
+                    Divider()
                     
                     //                    Spacer()
                     
@@ -295,6 +320,7 @@ struct ContentView: View {
                 
 //                self.url = url
                 self.heldTime = nil
+                self.offsetValue = ""
                 
                 
                 
