@@ -73,11 +73,11 @@ struct ContentView: View {
                         HStack {
                             Button("Hold") {
                                 model.hold()
-                            }.keyboardShortcut(.init("h"), modifiers: [.command, .shift])
+                            }.keyboardShortcut(.init("s"), modifiers: [.command])
                             
                             Button("Return") {
                                 model.returnAndPlay()
-                            }.keyboardShortcut(.init("r"), modifiers: [.command, .shift])
+                            }.keyboardShortcut(.init("r"), modifiers: [.command])
                             
                             Spacer()
                         }
@@ -313,6 +313,8 @@ struct ContentView: View {
                 
                 //                self.url = url
                 self.model.heldTime = nil
+                
+                self.selectedSpeed = "1.0"
                 
                 //                print(self.player.avPlayer)
             } catch {

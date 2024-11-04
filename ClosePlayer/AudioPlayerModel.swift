@@ -136,7 +136,9 @@ class AudioPlayerModel: ObservableObject {
             handlePlayerItemChange()
             startPlaybackUpdates()
         case .playing:
-            break
+            player.play()
+            handlePlayerItemChange()
+            startPlaybackUpdates()
         case .paused where isInterrupted:
             playerState = .playing
         case .paused:
