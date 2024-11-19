@@ -1,13 +1,13 @@
 //
-//  ClosePlayerUITestsLaunchTests.swift
-//  ClosePlayerUITests
+//  Precision_PlayerUITestsLaunchTests.swift
+//  Precision PlayerUITests
 //
-//  Created by David Reese on 6/14/23.
+//  Created by David Reese on 11/19/24.
 //
 
 import XCTest
 
-final class ClosePlayerUITestsLaunchTests: XCTestCase {
+final class Precision_PlayerUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
@@ -17,6 +17,7 @@ final class ClosePlayerUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()
