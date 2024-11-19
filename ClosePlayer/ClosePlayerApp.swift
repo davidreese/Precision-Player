@@ -14,8 +14,7 @@ struct ClosePlayerApp: App {
 //    @FocusState private var isFocused: Bool
     
     var body: some Scene {
-        WindowGroup {
-            let contentViewModel = ContentModel()
+        Window(Text("Precision Player"), id: "main") {
             ContentView()
                 .background(VisualEffectView().ignoresSafeArea())
         }

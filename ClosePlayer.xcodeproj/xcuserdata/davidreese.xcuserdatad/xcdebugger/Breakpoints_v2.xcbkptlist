@@ -46,8 +46,8 @@
             filePath = "ClosePlayer/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -258,36 +258,6 @@
             endingLineNumber = "267"
             landmarkName = "handleInterrupt(with:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6343883D-EE83-457C-A4E2-5346CC5639E7 - b8f82a87465a94cf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ClosePlayer.AudioPlayerModel.handleInterrupt(with: ClosePlayer.NowPlayableInterruption) -&gt; ()"
-                  moduleName = "ClosePlayer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidreese/github/Precision%20Player/ClosePlayer/ClosePlayer/AudioPlayerModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "268"
-                  endingLineNumber = "268">
-               </Location>
-               <Location
-                  uuid = "6343883D-EE83-457C-A4E2-5346CC5639E7 - b8f82a87465a94e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ClosePlayer.AudioPlayerModel.handleInterrupt(with: ClosePlayer.NowPlayableInterruption) -&gt; ()"
-                  moduleName = "ClosePlayer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidreese/github/Precision%20Player/ClosePlayer/ClosePlayer/AudioPlayerModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "267"
-                  endingLineNumber = "267">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

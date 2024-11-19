@@ -12,17 +12,8 @@ import Combine
 
 
 struct ContentView: View {
+    
     @ObservedObject private var model: ContentModel = ContentModel()
-    //    @StateObject private var player: Player = Player()
-    //    @State private var url: URL?
-    
-    //    private var player: Binding<AVAudioPlayer?> = Binding {
-    //        return nil
-    //    } set: { val in
-    //        not sure how to do this. currently just ripped out Player (commented out a lot of important lines in order to do that) and im trying to use AVAudioPlayer instead, but having a lot of trouble
-    //    }
-    
-    //    @State private var audioPlayer: AudioPlayer?
     
     @State private var isPresentingFileImporter = false
     
@@ -35,9 +26,15 @@ struct ContentView: View {
     @State private var selectedSpeed: String = "1.0" // Default selection
     let speeds: [String] = ["0.5", "1.0", "1.25", "1.5", "2.0", "3.0"]
     
-    init () {
+//    let windowId: String = ""
+//    @Environment(\.scenePhase) private var scenePhase
+    
+    /*
+    init (windowId: String) {
+        print("Window id: \(windowId)")
+        self.windowId = windowId
         //        model.startUpdating()
-    }
+    }*/
     
     var body: some View {
         VStack {
@@ -66,6 +63,7 @@ struct ContentView: View {
                         HStack {
                             Button((filename != nil) ? "Imported: \(filename!)" : "Import") {
                                 isPresentingFileImporter = true
+                                
                             }
                             
                             Spacer()
