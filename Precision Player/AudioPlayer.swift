@@ -10,16 +10,16 @@ import AVKit
 import MediaPlayer
 
 struct AudioPlayer: View {
-//    var player: StateObject<Player>
+    //    var player: StateObject<Player>
     @ObservedObject private(set) var model: AudioPlayerModel
     
     struct UI {
         static let cornerRadius = 8.0
     }
     
-//    init(player: StateObject<Player>) {
-//        self.player = player
-//    }
+    //    init(player: StateObject<Player>) {
+    //        self.player = player
+    //    }
     
     @State var showsTimeRemaining: Bool = false
     
@@ -50,70 +50,62 @@ struct AudioPlayer: View {
                             .frame(width: 15)
                     }).buttonStyle(.borderless)
                     
-                    Divider().padding(.vertical)
+                    Divider().padding(.vertical, 7)
                     
-                    if model.player.currentTime < 3600 {
+                    VStack(spacing: 0) {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        
                         HStack {
-                            Text(timeFormatted(totalSeconds: model.player.currentTime))
+                            //                            Spacer()
+                            ProgressView(value: model.player.currentTime, total: model.player.duration)
+                                .progressViewStyle(FocusedLinearProgressViewStyle())
                             Spacer()
                         }
-                        .frame(width: 45)
-                    } else {
                         HStack {
-                            Text(timeFormatted(totalSeconds: model.player.currentTime))
+                            //                            if model.player.currentTime < 3600 {
+                            HStack {
+                                Text(timeFormatted(totalSeconds: model.player.currentTime))
+                                Spacer()
+                            }
+                            Spacer()
+                            Group {
+                                //                                let seconds = showsTimeRemaining ? model.player.duration - model.player.currentTime : model.player.duration
+                                
+                                if !showsTimeRemaining {
+                                    HStack {
+                                        Spacer()
+                                        Text(timeFormatted(totalSeconds: model.player.duration))
+                                    }
+                                    //                                        .frame(width: 45)
+                                } else {
+                                    HStack {
+                                        Spacer()
+                                        Text("-" + timeFormatted(totalSeconds: model.player.duration - model.player.currentTime))
+                                    }
+                                    //                                        .frame(width: 53)
+                                }
+                                
+                            }
+                            .onTapGesture {
+                                showsTimeRemaining.toggle()
+                            }
                             Spacer()
                         }
-                        .frame(width: 65)
-                    }
-                    
-                    VStack {
+                        .font(.callout)
+//                        .bold()
+                        
                         Spacer()
-                        ProgressView(value: model.player.currentTime, total: model.player.duration)
-                            .progressViewStyle(FocusedLinearProgressViewStyle())
-//                            .background(.green)
+                        Spacer()
                         Spacer()
                     }
-                  
                     
                     
-                    Group {
-                        let seconds = showsTimeRemaining ? model.player.duration - model.player.currentTime : model.player.duration
-                        if seconds < 3600 {
-                            if !showsTimeRemaining {
-                                HStack {
-                                    Text(timeFormatted(totalSeconds: model.player.duration))
-                                    Spacer()
-                                }
-                                .frame(width: 45)
-                            } else {
-                                HStack {
-                                    Text("-" + timeFormatted(totalSeconds: model.player.duration - model.player.currentTime))
-                                    Spacer()
-                                }
-                                .frame(width: 53)
-                            }
-                        } else {
-                            if !showsTimeRemaining {
-                                HStack {
-                                    Text(timeFormatted(totalSeconds: model.player.duration))
-                                    Spacer()
-                                }
-                                .frame(width: 65)
-                            } else {
-                                HStack {
-                                    Text("-" + timeFormatted(totalSeconds: model.player.duration - model.player.currentTime))
-                                    Spacer()
-                                }
-                                .frame(width: 73)
-                            }
-                        }
-                    }
-                    .onTapGesture {
-                        showsTimeRemaining.toggle()
-                    }
+                    /*
+                     */
                     
-                    
-//                    Spacer()
+                    //                    Spacer()
                     
                 }
             }
@@ -124,7 +116,7 @@ struct AudioPlayer: View {
         model.onTimeChange = action
         return self
     }
-        
+    
     func setRate(_ rate: Float) {
         model.setPlaybackRate(rate)
     }
@@ -152,7 +144,7 @@ struct AudioPlayer: View {
             return String(format: "%02d:%02d", minutes, seconds)
         }
     }
-
+    
     func timeFormattedMini(totalSeconds: TimeInterval) -> String {
         let seconds: Int = Int((totalSeconds).truncatingRemainder(dividingBy: 60))
         let minutes: Int = Int(((totalSeconds / 60.0).truncatingRemainder(dividingBy: 60)))
@@ -170,5 +162,13 @@ struct AudioPlayer: View {
             }
             return str
         }
+    }
+}
+
+struct AudioPlayer_Previews: PreviewProvider {
+    static var previews: some View {
+        let url = Bundle.main.url(forResource: "beethoven-fifth", withExtension: "mp3")!
+        let audioPlayer = try? AVAudioPlayer(contentsOf: url)
+        AudioPlayer(player: audioPlayer!, title: "Test")
     }
 }

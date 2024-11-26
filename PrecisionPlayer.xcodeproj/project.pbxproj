@@ -1,0 +1,699 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F2CAB2062CF58292003F583D /* beethoven-fifth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2CAB2052CF58292003F583D /* beethoven-fifth.mp3 */; };
+		F2F010342CECC359003E8F2F /* ConfigAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0101A2CECC359003E8F2F /* ConfigAsset.swift */; };
+		F2F010352CECC359003E8F2F /* TimeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010312CECC359003E8F2F /* TimeKit.swift */; };
+		F2F010362CECC359003E8F2F /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010292CECC359003E8F2F /* AudioPlayerModel.swift */; };
+		F2F010372CECC359003E8F2F /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0101D2CECC359003E8F2F /* ConfigModel.swift */; };
+		F2F010382CECC359003E8F2F /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010282CECC359003E8F2F /* AudioPlayer.swift */; };
+		F2F010392CECC359003E8F2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0102B2CECC359003E8F2F /* ContentView.swift */; };
+		F2F0103A2CECC359003E8F2F /* ConfigPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0101E2CECC359003E8F2F /* ConfigPath.swift */; };
+		F2F0103B2CECC359003E8F2F /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0101B2CECC359003E8F2F /* ConfigCommand.swift */; };
+		F2F0103C2CECC359003E8F2F /* NowPlayableMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010232CECC359003E8F2F /* NowPlayableMetadata.swift */; };
+		F2F0103D2CECC359003E8F2F /* MacNowPlayableBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0102D2CECC359003E8F2F /* MacNowPlayableBehavior.swift */; };
+		F2F0103E2CECC359003E8F2F /* NowPlayableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010222CECC359003E8F2F /* NowPlayableError.swift */; };
+		F2F0103F2CECC359003E8F2F /* ConfigCommandCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0101C2CECC359003E8F2F /* ConfigCommandCollection.swift */; };
+		F2F010402CECC359003E8F2F /* NowPlayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010202CECC359003E8F2F /* NowPlayable.swift */; };
+		F2F010412CECC359003E8F2F /* NowPlayableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010212CECC359003E8F2F /* NowPlayableCommand.swift */; };
+		F2F010422CECC359003E8F2F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0102E2CECC359003E8F2F /* Player.swift */; };
+		F2F010432CECC359003E8F2F /* PrecisionPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010302CECC359003E8F2F /* PrecisionPlayerApp.swift */; };
+		F2F010442CECC359003E8F2F /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F010322CECC359003E8F2F /* UI.swift */; };
+		F2F010452CECC359003E8F2F /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0102A2CECC359003E8F2F /* ContentModel.swift */; };
+		F2F010462CECC359003E8F2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F010252CECC359003E8F2F /* Preview Assets.xcassets */; };
+		F2F010472CECC359003E8F2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F010272CECC359003E8F2F /* Assets.xcassets */; };
+		F2F010482CECC359003E8F2F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2F0102C2CECC359003E8F2F /* Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2F010002CECC29C003E8F2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2FDD1CB2A3ABC840040360C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2F00FEE2CECC29B003E8F2F;
+			remoteInfo = "Precision Player";
+		};
+		F2F0100A2CECC29C003E8F2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2FDD1CB2A3ABC840040360C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2F00FEE2CECC29B003E8F2F;
+			remoteInfo = "Precision Player";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F20157EE2A3C9720007000B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		F2CAB2052CF58292003F583D /* beethoven-fifth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beethoven-fifth.mp3"; sourceTree = "<group>"; };
+		F2F00FEF2CECC29B003E8F2F /* Precision Player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Precision Player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2F00FFF2CECC29C003E8F2F /* Precision PlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Precision PlayerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2F010092CECC29C003E8F2F /* Precision PlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Precision PlayerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2F0101A2CECC359003E8F2F /* ConfigAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigAsset.swift; sourceTree = "<group>"; };
+		F2F0101B2CECC359003E8F2F /* ConfigCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCommand.swift; sourceTree = "<group>"; };
+		F2F0101C2CECC359003E8F2F /* ConfigCommandCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCommandCollection.swift; sourceTree = "<group>"; };
+		F2F0101D2CECC359003E8F2F /* ConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
+		F2F0101E2CECC359003E8F2F /* ConfigPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPath.swift; sourceTree = "<group>"; };
+		F2F010202CECC359003E8F2F /* NowPlayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayable.swift; sourceTree = "<group>"; };
+		F2F010212CECC359003E8F2F /* NowPlayableCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayableCommand.swift; sourceTree = "<group>"; };
+		F2F010222CECC359003E8F2F /* NowPlayableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayableError.swift; sourceTree = "<group>"; };
+		F2F010232CECC359003E8F2F /* NowPlayableMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayableMetadata.swift; sourceTree = "<group>"; };
+		F2F010252CECC359003E8F2F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F2F010272CECC359003E8F2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F2F010282CECC359003E8F2F /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		F2F010292CECC359003E8F2F /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
+		F2F0102A2CECC359003E8F2F /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
+		F2F0102B2CECC359003E8F2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F2F0102C2CECC359003E8F2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2F0102D2CECC359003E8F2F /* MacNowPlayableBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacNowPlayableBehavior.swift; sourceTree = "<group>"; };
+		F2F0102E2CECC359003E8F2F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		F2F010302CECC359003E8F2F /* PrecisionPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecisionPlayerApp.swift; sourceTree = "<group>"; };
+		F2F010312CECC359003E8F2F /* TimeKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeKit.swift; sourceTree = "<group>"; };
+		F2F010322CECC359003E8F2F /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		F2F010492CECC393003E8F2F /* Precision_Player.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Precision_Player.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F2F010022CECC29C003E8F2F /* Precision PlayerTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Precision PlayerTests"; sourceTree = "<group>"; };
+		F2F0100C2CECC29C003E8F2F /* Precision PlayerUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Precision PlayerUITests"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2F00FEC2CECC29B003E8F2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2F00FFC2CECC29C003E8F2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2F010062CECC29C003E8F2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F20157ED2A3C9720007000B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F20157EE2A3C9720007000B6 /* AVKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2F0101F2CECC359003E8F2F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F2F0101A2CECC359003E8F2F /* ConfigAsset.swift */,
+				F2F0101B2CECC359003E8F2F /* ConfigCommand.swift */,
+				F2F0101C2CECC359003E8F2F /* ConfigCommandCollection.swift */,
+				F2F0101D2CECC359003E8F2F /* ConfigModel.swift */,
+				F2F0101E2CECC359003E8F2F /* ConfigPath.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		F2F010242CECC359003E8F2F /* NowPlayable */ = {
+			isa = PBXGroup;
+			children = (
+				F2F010202CECC359003E8F2F /* NowPlayable.swift */,
+				F2F010212CECC359003E8F2F /* NowPlayableCommand.swift */,
+				F2F010222CECC359003E8F2F /* NowPlayableError.swift */,
+				F2F010232CECC359003E8F2F /* NowPlayableMetadata.swift */,
+			);
+			path = NowPlayable;
+			sourceTree = "<group>";
+		};
+		F2F010262CECC359003E8F2F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F2CAB2052CF58292003F583D /* beethoven-fifth.mp3 */,
+				F2F010252CECC359003E8F2F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F2F010332CECC359003E8F2F /* Precision Player */ = {
+			isa = PBXGroup;
+			children = (
+				F2F0101F2CECC359003E8F2F /* Configuration */,
+				F2F010242CECC359003E8F2F /* NowPlayable */,
+				F2F010262CECC359003E8F2F /* Preview Content */,
+				F2F010272CECC359003E8F2F /* Assets.xcassets */,
+				F2F010282CECC359003E8F2F /* AudioPlayer.swift */,
+				F2F010292CECC359003E8F2F /* AudioPlayerModel.swift */,
+				F2F0102A2CECC359003E8F2F /* ContentModel.swift */,
+				F2F0102B2CECC359003E8F2F /* ContentView.swift */,
+				F2F0102C2CECC359003E8F2F /* Info.plist */,
+				F2F0102D2CECC359003E8F2F /* MacNowPlayableBehavior.swift */,
+				F2F0102E2CECC359003E8F2F /* Player.swift */,
+				F2F010492CECC393003E8F2F /* Precision_Player.entitlements */,
+				F2F010302CECC359003E8F2F /* PrecisionPlayerApp.swift */,
+				F2F010312CECC359003E8F2F /* TimeKit.swift */,
+				F2F010322CECC359003E8F2F /* UI.swift */,
+			);
+			path = "Precision Player";
+			sourceTree = "<group>";
+		};
+		F2FDD1CA2A3ABC840040360C = {
+			isa = PBXGroup;
+			children = (
+				F2F010332CECC359003E8F2F /* Precision Player */,
+				F2F010022CECC29C003E8F2F /* Precision PlayerTests */,
+				F2F0100C2CECC29C003E8F2F /* Precision PlayerUITests */,
+				F2FDD1D42A3ABC840040360C /* Products */,
+				F20157ED2A3C9720007000B6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F2FDD1D42A3ABC840040360C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2F00FEF2CECC29B003E8F2F /* Precision Player.app */,
+				F2F00FFF2CECC29C003E8F2F /* Precision PlayerTests.xctest */,
+				F2F010092CECC29C003E8F2F /* Precision PlayerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2F00FEE2CECC29B003E8F2F /* Precision Player */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2F010112CECC29C003E8F2F /* Build configuration list for PBXNativeTarget "Precision Player" */;
+			buildPhases = (
+				F2F00FEB2CECC29B003E8F2F /* Sources */,
+				F2F00FEC2CECC29B003E8F2F /* Frameworks */,
+				F2F00FED2CECC29B003E8F2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Precision Player";
+			packageProductDependencies = (
+			);
+			productName = "Precision Player";
+			productReference = F2F00FEF2CECC29B003E8F2F /* Precision Player.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F2F00FFE2CECC29C003E8F2F /* Precision PlayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2F010142CECC29C003E8F2F /* Build configuration list for PBXNativeTarget "Precision PlayerTests" */;
+			buildPhases = (
+				F2F00FFB2CECC29C003E8F2F /* Sources */,
+				F2F00FFC2CECC29C003E8F2F /* Frameworks */,
+				F2F00FFD2CECC29C003E8F2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2F010012CECC29C003E8F2F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F2F010022CECC29C003E8F2F /* Precision PlayerTests */,
+			);
+			name = "Precision PlayerTests";
+			packageProductDependencies = (
+			);
+			productName = "Precision PlayerTests";
+			productReference = F2F00FFF2CECC29C003E8F2F /* Precision PlayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F2F010082CECC29C003E8F2F /* Precision PlayerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2F010172CECC29C003E8F2F /* Build configuration list for PBXNativeTarget "Precision PlayerUITests" */;
+			buildPhases = (
+				F2F010052CECC29C003E8F2F /* Sources */,
+				F2F010062CECC29C003E8F2F /* Frameworks */,
+				F2F010072CECC29C003E8F2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2F0100B2CECC29C003E8F2F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F2F0100C2CECC29C003E8F2F /* Precision PlayerUITests */,
+			);
+			name = "Precision PlayerUITests";
+			packageProductDependencies = (
+			);
+			productName = "Precision PlayerUITests";
+			productReference = F2F010092CECC29C003E8F2F /* Precision PlayerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2FDD1CB2A3ABC840040360C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					F2F00FEE2CECC29B003E8F2F = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					F2F00FFE2CECC29C003E8F2F = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F2F00FEE2CECC29B003E8F2F;
+					};
+					F2F010082CECC29C003E8F2F = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F2F00FEE2CECC29B003E8F2F;
+					};
+				};
+			};
+			buildConfigurationList = F2FDD1CE2A3ABC840040360C /* Build configuration list for PBXProject "PrecisionPlayer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F2FDD1CA2A3ABC840040360C;
+			productRefGroup = F2FDD1D42A3ABC840040360C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2F00FEE2CECC29B003E8F2F /* Precision Player */,
+				F2F00FFE2CECC29C003E8F2F /* Precision PlayerTests */,
+				F2F010082CECC29C003E8F2F /* Precision PlayerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2F00FED2CECC29B003E8F2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2F010462CECC359003E8F2F /* Preview Assets.xcassets in Resources */,
+				F2F010472CECC359003E8F2F /* Assets.xcassets in Resources */,
+				F2F010482CECC359003E8F2F /* Info.plist in Resources */,
+				F2CAB2062CF58292003F583D /* beethoven-fifth.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2F00FFD2CECC29C003E8F2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2F010072CECC29C003E8F2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2F00FEB2CECC29B003E8F2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2F010342CECC359003E8F2F /* ConfigAsset.swift in Sources */,
+				F2F010352CECC359003E8F2F /* TimeKit.swift in Sources */,
+				F2F010362CECC359003E8F2F /* AudioPlayerModel.swift in Sources */,
+				F2F010372CECC359003E8F2F /* ConfigModel.swift in Sources */,
+				F2F010382CECC359003E8F2F /* AudioPlayer.swift in Sources */,
+				F2F010392CECC359003E8F2F /* ContentView.swift in Sources */,
+				F2F0103A2CECC359003E8F2F /* ConfigPath.swift in Sources */,
+				F2F0103B2CECC359003E8F2F /* ConfigCommand.swift in Sources */,
+				F2F0103C2CECC359003E8F2F /* NowPlayableMetadata.swift in Sources */,
+				F2F0103D2CECC359003E8F2F /* MacNowPlayableBehavior.swift in Sources */,
+				F2F0103E2CECC359003E8F2F /* NowPlayableError.swift in Sources */,
+				F2F0103F2CECC359003E8F2F /* ConfigCommandCollection.swift in Sources */,
+				F2F010402CECC359003E8F2F /* NowPlayable.swift in Sources */,
+				F2F010412CECC359003E8F2F /* NowPlayableCommand.swift in Sources */,
+				F2F010422CECC359003E8F2F /* Player.swift in Sources */,
+				F2F010432CECC359003E8F2F /* PrecisionPlayerApp.swift in Sources */,
+				F2F010442CECC359003E8F2F /* UI.swift in Sources */,
+				F2F010452CECC359003E8F2F /* ContentModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2F00FFB2CECC29C003E8F2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2F010052CECC29C003E8F2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2F010012CECC29C003E8F2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2F00FEE2CECC29B003E8F2F /* Precision Player */;
+			targetProxy = F2F010002CECC29C003E8F2F /* PBXContainerItemProxy */;
+		};
+		F2F0100B2CECC29C003E8F2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2F00FEE2CECC29B003E8F2F /* Precision Player */;
+			targetProxy = F2F0100A2CECC29C003E8F2F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F2F010122CECC29C003E8F2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Precision Player/Precision_Player.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "\"Precision Player/Preview Content\"";
+				DEVELOPMENT_TEAM = YL279DNVQD;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.reesedevelopment.Precision-Player";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F2F010132CECC29C003E8F2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Precision Player/Precision_Player.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_ASSET_PATHS = "\"Precision Player/Preview Content\"";
+				DEVELOPMENT_TEAM = YL279DNVQD;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.reesedevelopment.Precision-Player";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F2F010152CECC29C003E8F2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YL279DNVQD;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.reesedevelopment.Precision-PlayerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Precision Player.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Precision Player";
+			};
+			name = Debug;
+		};
+		F2F010162CECC29C003E8F2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YL279DNVQD;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.reesedevelopment.Precision-PlayerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Precision Player.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Precision Player";
+			};
+			name = Release;
+		};
+		F2F010182CECC29C003E8F2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YL279DNVQD;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.reesedevelopment.Precision-PlayerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Precision Player";
+			};
+			name = Debug;
+		};
+		F2F010192CECC29C003E8F2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YL279DNVQD;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.reesedevelopment.Precision-PlayerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Precision Player";
+			};
+			name = Release;
+		};
+		F2FDD1F62A3ABC850040360C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F2FDD1F72A3ABC850040360C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2F010112CECC29C003E8F2F /* Build configuration list for PBXNativeTarget "Precision Player" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2F010122CECC29C003E8F2F /* Debug */,
+				F2F010132CECC29C003E8F2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2F010142CECC29C003E8F2F /* Build configuration list for PBXNativeTarget "Precision PlayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2F010152CECC29C003E8F2F /* Debug */,
+				F2F010162CECC29C003E8F2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2F010172CECC29C003E8F2F /* Build configuration list for PBXNativeTarget "Precision PlayerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2F010182CECC29C003E8F2F /* Debug */,
+				F2F010192CECC29C003E8F2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2FDD1CE2A3ABC840040360C /* Build configuration list for PBXProject "PrecisionPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2FDD1F62A3ABC850040360C /* Debug */,
+				F2FDD1F72A3ABC850040360C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2FDD1CB2A3ABC840040360C /* Project object */;
+}

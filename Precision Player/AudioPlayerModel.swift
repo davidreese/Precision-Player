@@ -52,7 +52,8 @@ class AudioPlayerModel: ObservableObject {
 //        self.title = title
 //        self.artist = artist
         
-        staticMetadata = NowPlayableStaticMetadata(assetURL: player.url!, mediaType: .audio, isLiveStream: false, title: title, artist: artist ?? "", artwork: nil, albumArtist: nil, albumTitle: nil)
+        guard let url = player.url else { return }
+        staticMetadata = NowPlayableStaticMetadata(assetURL: url, mediaType: .audio, isLiveStream: false, title: title, artist: artist ?? "", artwork: nil, albumArtist: nil, albumTitle: nil)
         
         configureNowPlayable()
     }
@@ -181,9 +182,7 @@ class AudioPlayerModel: ObservableObject {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             self?.handlePlaybackChange()
-//            withAnimation {
-                self?.objectWillChange.send()
-//            }
+            self?.objectWillChange.send()
         }
     }
 

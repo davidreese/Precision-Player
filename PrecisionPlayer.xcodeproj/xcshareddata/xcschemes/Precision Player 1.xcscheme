@@ -4,7 +4,8 @@
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2FDD1D22A3ABC840040360C"
-               BuildableName = "ClosePlayer.app"
-               BlueprintName = "ClosePlayer"
-               ReferencedContainer = "container:ClosePlayer.xcodeproj">
+               BlueprintIdentifier = "F2F00FEE2CECC29B003E8F2F"
+               BuildableName = "Precision Player.app"
+               BlueprintName = "Precision Player"
+               ReferencedContainer = "container:PrecisionPlayer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,30 +29,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2FDD1E32A3ABC850040360C"
-               BuildableName = "ClosePlayerTests.xctest"
-               BlueprintName = "ClosePlayerTests"
-               ReferencedContainer = "container:ClosePlayer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2FDD1ED2A3ABC850040360C"
-               BuildableName = "ClosePlayerUITests.xctest"
-               BlueprintName = "ClosePlayerUITests"
-               ReferencedContainer = "container:ClosePlayer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -67,15 +44,15 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2FDD1D22A3ABC840040360C"
-            BuildableName = "ClosePlayer.app"
-            BlueprintName = "ClosePlayer"
-            ReferencedContainer = "container:ClosePlayer.xcodeproj">
+            BlueprintIdentifier = "F2F00FEE2CECC29B003E8F2F"
+            BuildableName = "Precision Player.app"
+            BlueprintName = "Precision Player"
+            ReferencedContainer = "container:PrecisionPlayer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -84,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2FDD1D22A3ABC840040360C"
-            BuildableName = "ClosePlayer.app"
-            BlueprintName = "ClosePlayer"
-            ReferencedContainer = "container:ClosePlayer.xcodeproj">
+            BlueprintIdentifier = "F2F00FEE2CECC29B003E8F2F"
+            BuildableName = "Precision Player.app"
+            BlueprintName = "Precision Player"
+            ReferencedContainer = "container:PrecisionPlayer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

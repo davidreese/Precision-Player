@@ -1,6 +1,6 @@
 //
 //  PrecisionPlayerApp.swift
-//  ClosePlayer
+//  PrecisionPlayer
 //
 //  Created by David Reese on 6/14/23.
 //
